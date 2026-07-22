@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="340" viewBox="-70 -170 140 170">
+  <defs>
+    <filter id="soft-shadow" x="-40%" y="-30%" width="180%" height="170%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#281f19" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <ellipse cx="0" cy="2" rx="30" ry="4.5" fill="rgba(90,74,58,.11)"/>
+  <g filter="url(#soft-shadow)">
+    <path
+      d="M 0 -157 Q 3.5 -155.5 7 -149 C 19 -148 30 -134 30 -116 C 30 -105 24 -102 24 -93 C 24 -81 42 -64 42 -50 C 42 -23 23 0 0 0 C -23 0 -42 -23 -42 -50 C -42 -64 -24 -81 -24 -93 C -24 -102 -30 -105 -30 -116 C -30 -134 -19 -148 -7 -149 Q -3.5 -155.5 0 -157 Z"
+      fill="#f5f2ec"
+      stroke="#5a4a3a"
+      stroke-width="2.2"
+      stroke-linejoin="round"
+    />
+    <g fill="none" stroke="#ddd3c4" stroke-width="1.8" stroke-linecap="round">
+      <path d="M -30 -80 C -35 -69 -36 -55 -32 -42"/>
+      <path d="M 27 -82 C 32 -71 33 -57 30 -46"/>
+      <path d="M -17 -38 C -19 -31 -18 -24 -15 -19"/>
+      <path d="M -17 -139 C -21 -131 -22 -122 -20 -114"/>
+      <path d="M 15 -143 C 19 -136 20 -130 19 -125"/>
+    </g>
+    <circle cx="-12" cy="-123" r="2.4" fill="#5a4a3a"/>
+    <circle cx="12" cy="-125" r="2.7" fill="#5a4a3a"/>
+  </g>
+</svg>

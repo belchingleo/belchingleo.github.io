@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="王礼耀 Liyao Wang 的个人网站：产品、研究、写作与经历。"
+    />
+    <meta name="theme-color" content="#111214" />
+    <title>王礼耀 Liyao Wang</title>
+    <link rel="icon" href="assets/tiptap/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="home-page">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="site-header" data-header>
+      <a class="wordmark" href="index.html" aria-label="返回首页">
+        <span>王礼耀</span>
+        <span class="wordmark-en">Liyao Wang</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">打开导航</span>
+        <span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="主要导航">
+        <a href="#work" aria-current="page"><span class="nav-zh">作品</span><span class="nav-en">Selected Work</span></a>
+        <a href="experience.html"><span class="nav-zh">实习经历</span><span class="nav-en">Experience</span></a>
+        <a href="research.html"><span class="nav-zh">研究与写作</span><span class="nav-en">Research &amp; Writing</span></a>
+        <a href="cv.html"><span class="nav-zh">简历</span><span class="nav-en">CV</span></a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="kicker">Media · Technology · Lifeworld</p>
+          <h1 id="hero-title">
+            <span>先理解技术，</span>
+            <span>再理解人类。</span>
+          </h1>
+          <p class="hero-intro">
+            Hi，我是王礼耀，复旦大学在读博士生，目前正在伦敦国王学院数字人文系进行联合培养。
+            我的研究方向是媒介学、城市传播、注意力理论，聚焦人与机器的感知方式与边界，自动驾驶、电子游戏是我主要的研究对象。
+          </p>
+          <nav class="hero-nav" aria-label="主要导航">
+            <a href="#work">
+              <span class="hero-nav-zh">作品</span>
+              <span class="hero-nav-en">Selected Work</span>
+            </a>
+            <a href="experience.html">
+              <span class="hero-nav-zh">实习经历</span>
+              <span class="hero-nav-en">Experience</span>
+            </a>
+            <a href="research.html">
+              <span class="hero-nav-zh">研究与写作</span>
+              <span class="hero-nav-en">Research &amp; Writing</span>
+            </a>
+            <a href="cv.html">
+              <span class="hero-nav-zh">简历</span>
+              <span class="hero-nav-en">CV</span>
+            </a>
+          </nav>
+        </div>
+
+        <figure class="hero-window">
+          <div class="hero-photo-wrap">
+            <img src="assets/life/window-portrait.jpg" alt="王礼耀站在窗外，远处是山野" />
+          </div>
+        </figure>
+      </section>
+
+      <section class="section" id="work" aria-labelledby="work-title">
+        <header class="section-heading section-heading-primary">
+          <h2 id="work-title"><span class="section-title-zh">作品</span><span class="section-title-en">Selected Work</span></h2>
+        </header>
+
+        <div class="project-stack">
+          <article class="project-card project-tiptap">
+            <div class="project-copy">
+              <div class="project-meta">
+                <span>独立产品 · Independent product</span>
+                <span>2026</span>
+              </div>
+              <h3>Tiptap</h3>
+              <p class="project-lead">把 macOS 桌面变成小花生真实生活的环境。</p>
+              <p class="project-description">
+                Tiptap 是一个低打扰的微型具身代理。它持续读取窗口、Dock、鼠标和匿名输入节奏，
+                在桌面地形中形成漫游、攀爬、回家、受惊与陪伴等行为。
+              </p>
+              <p class="project-note">
+                独立完成产品定义、交互与测试；使用 Codex 进行 vibe coding。
+              </p>
+              <a class="inline-link" href="https://github.com/water-ops" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <ul class="fact-row" aria-label="Tiptap 当前状态">
+                <li><strong>0.1.0</strong><span>Developer Preview</span></li>
+                <li><strong>84 / 84</strong><span>自动化测试</span></li>
+                <li><strong>Local-first</strong><span>隐私边界</span></li>
+              </ul>
+            </div>
+
+            <div class="tiptap-scene" aria-label="Tiptap 正在 macOS 桌面环境中运行的产品切片" role="img">
+              <div class="desktop-menubar">
+                <span class="desktop-brand"><i></i>Tiptap</span>
+                <span>Wed 10:32</span>
+              </div>
+              <div class="desktop-canvas">
+                <div class="desktop-window window-main">
+                  <div class="window-bar"><i></i><i></i><i></i><span>Writing · Notes</span></div>
+                  <div class="window-body">
+                    <span class="copy-line line-long"></span>
+                    <span class="copy-line line-mid"></span>
+                    <span class="copy-line line-short"></span>
+                    <div class="window-card"></div>
+                  </div>
+                </div>
+                <div class="context-panel">
+                  <span>ENVIRONMENT</span>
+                  <strong>calm · observing</strong>
+                  <small>window changed 12s ago</small>
+                </div>
+                <div class="desktop-window window-side">
+                  <div class="window-bar"><i></i><i></i><i></i><span>Reference</span></div>
+                  <div class="mini-grid"><i></i><i></i><i></i><i></i></div>
+                </div>
+                <div class="dock-line">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <img class="scene-peanut" src="assets/tiptap/peanut.svg" alt="" />
+                <span class="live-status"><i></i>running locally</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-cloud">
+            <div class="cloud-collage" aria-label="云文献产品原型界面截图">
+              <figure class="prototype-shot shot-library">
+                <img src="assets/cloud/multi-document.png" alt="云文献多文献选择与主题筛选界面" />
+              </figure>
+              <figure class="prototype-shot shot-workspace">
+                <img src="assets/cloud/ai-reader.png" alt="云文献原文阅读、文献信息与 AI 论文概览界面" />
+              </figure>
+              <span class="prototype-label">Interactive prototype · Modao</span>
+            </div>
+
+            <div class="project-copy">
+              <div class="project-meta">
+                <span>RING Review · 产品原型</span>
+                <span>2023</span>
+              </div>
+              <h3>云文献</h3>
+              <p class="project-lead">把阅读、比较与整理连成一条研究工作流。</p>
+              <p class="project-description">
+                面向学术阅读场景，围绕文献上传、AI 阅读、原文标注、多文献对比与管理，
+                梳理产品流程并完成核心交互与界面原型。
+              </p>
+              <p class="project-note">产品流程 · 墨刀交互原型 · Figma 图标设计</p>
+              <a
+                class="inline-link"
+                href="https://modao.cc/proto/WWRARDUrzvsxw8esrP9hX/sharing?view_mode=read_only&amp;screen=rbpToUFxjSQAMRxyo"
+                target="_blank"
+                rel="noreferrer"
+              >查看只读原型 ↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div class="peanut-companion" data-companion aria-hidden="true">
+      <span class="companion-motion">
+        <img src="assets/tiptap/peanut.svg" alt="" />
+      </span>
+    </div>
+
+    <footer class="site-footer">
+      <p>© <span data-year></span> Liyao Wang</p>
+      <p>由 Codex 协助设计与开发。<small>Designed and built with Codex.</small></p>
+    </footer>
+  </body>
+</html>
