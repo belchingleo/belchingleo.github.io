@@ -1,0 +1,66 @@
+:root {
+  --color-paper: oklch(16.2% 0.008 265);
+  --color-paper-2: oklch(19.6% 0.009 265);
+  --color-paper-3: oklch(23.5% 0.010 265);
+  --color-ink: oklch(95.5% 0.008 88);
+  --color-ink-2: oklch(79% 0.010 270);
+  --color-muted: oklch(62% 0.012 270);
+  --color-neutral: oklch(48% 0.012 270);
+  --color-rule: oklch(30% 0.011 270);
+  --color-rule-2: oklch(38% 0.013 270);
+  --color-accent: oklch(75.5% 0.126 270);
+  --color-accent-soft: oklch(75.5% 0.126 270 / 0.14);
+  --color-accent-ink: oklch(16.2% 0.008 265);
+  --color-focus: oklch(80% 0.15 270);
+  --color-shadow: oklch(7% 0.008 265 / 0.42);
+  --color-print-paper: oklch(98% 0.006 90);
+  --color-print-ink: oklch(18% 0.008 265);
+
+  --font-display: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", STSong, serif;
+  --font-body: "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-outlier: "SFMono-Regular", "IBM Plex Mono", Menlo, Consolas, monospace;
+
+  --display-weight: 600;
+  --tracking-display: -0.055em;
+  --tracking-label: 0.12em;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 3.25rem;
+  --text-display: clamp(3rem, 7.8vw, 8.25rem);
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+  --space-4xl: 11rem;
+  --space-5xl: 15rem;
+
+  --page-gutter: clamp(1.125rem, 4.5vw, 5.75rem);
+  --content-max: 118rem;
+  --measure: 44rem;
+
+  --rule-hair: 1px;
+  --rule-fine: 2px;
+  --radius-card: 0.75rem;
+  --radius-media: 1.125rem;
+  --radius-pill: 999px;
+  --radius-input: 0.4rem;
+  --shadow-card: 0 1.5rem 4rem var(--color-shadow);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+}

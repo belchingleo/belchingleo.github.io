@@ -1,0 +1,32 @@
+{
+  "scanned_at": "2026-07-25",
+  "scope": "multi-page",
+  "framework": "vanilla HTML/CSS/JS",
+  "pages": [
+    "index.html",
+    "experience.html",
+    "research.html",
+    "cv.html"
+  ],
+  "font_stack": {
+    "display": "Inter/system sans",
+    "body": "Inter/system sans",
+    "utility": "system monospace"
+  },
+  "palette": {
+    "paper": "#111214",
+    "surface": "#191a1d",
+    "ink": "#f1f0eb",
+    "accent": "#8fa6ff"
+  },
+  "motion": "custom CSS and vanilla JavaScript; no motion library",
+  "spacing": "fluid padding and ad-hoc values; no complete named scale",
+  "preserve": [
+    "dark blue-tinted palette",
+    "#8FA6FF accent",
+    "Chinese-first content",
+    "photography",
+    "Tiptap peanut companion",
+    "existing routes and information architecture"
+  ]
+}

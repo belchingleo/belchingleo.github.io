@@ -1,2 +1,5 @@
 .DS_Store
 assets/publications/
+
+# 原始录屏素材(未被网站引用;单个超过 GitHub 100MB 上限)
+assets/tiptap/*.mov

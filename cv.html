@@ -2,15 +2,19 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="王礼耀 Liyao Wang 的网页履历。" />
     <meta name="theme-color" content="#111214" />
-    <title>CV · 王礼耀 Liyao Wang</title>
-    <link rel="icon" href="assets/tiptap/icon.svg" type="image/svg+xml" />
+    <title>个人简历 · 王礼耀</title>
+    <link rel="icon" href="assets/icon.svg?v=2" type="image/svg+xml" />
+    <link rel="alternate icon" href="assets/icon-32.png?v=2" sizes="32x32" type="image/png" />
+    <link rel="alternate icon" href="assets/icon-16.png?v=2" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2" sizes="180x180" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="hallmark.css?v=20260726-10" />
+    <script src="script.js?v=20260726-6" defer></script>
   </head>
-  <body>
+  <body class="cv-page-body">
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="site-header" data-header>
@@ -23,99 +27,96 @@
         <span></span><span></span>
       </button>
       <nav class="site-nav" id="site-nav" aria-label="主要导航">
-        <a href="index.html#work"><span class="nav-zh">作品</span><span class="nav-en">Selected Work</span></a>
-        <a href="experience.html"><span class="nav-zh">实习经历</span><span class="nav-en">Experience</span></a>
-        <a href="research.html"><span class="nav-zh">研究与写作</span><span class="nav-en">Research &amp; Writing</span></a>
-        <a href="cv.html" aria-current="page"><span class="nav-zh">简历</span><span class="nav-en">CV</span></a>
+        <a href="index.html#work"><span class="nav-zh">作品</span></a>
+        <a href="experience.html"><span class="nav-zh">实习经历</span></a>
+        <a href="research.html"><span class="nav-zh">学术研究与写作</span></a>
+        <a href="cv.html" aria-current="page"><span class="nav-zh">简历</span></a>
       </nav>
     </header>
 
     <main id="main" class="inner-page cv-page">
       <header class="cv-intro">
-        <div>
-          <p class="kicker bilingual-kicker"><span>个人简历</span><small>Curriculum Vitae</small></p>
+        <div class="cv-name-block">
+          <p class="kicker cv-kicker">个人简历</p>
           <h1>王礼耀<br /><span>Liyao Wang</span></h1>
+          <a class="download-link" href="assets/cv/liyao-wang-cv.pdf" target="_blank">下载 PDF <span class="arrow arrow-down" aria-hidden="true">↓</span></a>
         </div>
         <div class="cv-summary">
           <figure class="cv-avatar">
-            <img src="assets/life/cv-lakeside.jpg" alt="王礼耀在湖边" />
+            <img src="assets/life/cv-portrait.jpg" alt="王礼耀的生活照" width="1200" height="1600" />
           </figure>
-          <div>
-            <p>传播学博士生，关注智能系统、媒介技术与日常世界，也进行独立产品实验。</p>
-            <a class="download-link" href="assets/cv/liyao-wang-cv.pdf" target="_blank">下载 PDF ↓ <small>Download</small></a>
-          </div>
         </div>
       </header>
 
       <div class="cv-layout">
         <aside class="cv-aside" aria-label="联系方式与技能">
           <section>
-            <h2><span>联系方式</span><small>Contact</small></h2>
+            <h2>联系方式</h2>
             <a href="mailto:wangliyao97@gmail.com">wangliyao97@gmail.com</a>
             <a href="https://github.com/water-ops" target="_blank" rel="noreferrer">github.com/water-ops</a>
           </section>
           <section>
-            <h2><span>研究方向</span><small>Research</small></h2>
+            <h2>研究方向</h2>
             <p>媒介研究</p>
             <p>智能系统与人机感知</p>
             <p>数据新闻与视觉真实</p>
           </section>
           <section>
-            <h2><span>工具</span><small>Tools</small></h2>
+            <h2>工具</h2>
             <p>Figma · 墨刀 · Codex</p>
             <p>Python · SQL · R</p>
             <p>Tableau · NVivo</p>
           </section>
           <section>
-            <h2><span>语言</span><small>Languages</small></h2>
-            <p>中文 · Native</p>
-            <p>English · Working proficiency</p>
+            <h2>语言</h2>
+            <p>中文 · 母语</p>
+            <p>英语 · 工作交流</p>
           </section>
         </aside>
 
         <div class="cv-main">
-          <section class="cv-section" aria-labelledby="cv-education">
-            <h2 id="cv-education"><span>教育经历</span><small>Education</small></h2>
+          <section class="cv-section" data-reveal aria-labelledby="cv-education">
+            <h2 id="cv-education">教育经历</h2>
             <article class="cv-entry compact education-entry">
-              <div class="cv-date">2025 — 2026</div>
-              <div>
-                <h3>King’s College London</h3>
-                <p>联合培养博士 · 数字人文系</p>
-                <p class="cv-coursework"><span>课程 · Coursework</span>Ethnography for the Internet · The Digital Image</p>
-              </div>
-            </article>
-            <article class="cv-entry compact education-entry">
-              <div class="cv-date">2023 — present</div>
+              <div class="cv-date">2023—2027（预计）</div>
               <div>
                 <h3>复旦大学</h3>
                 <p>新闻传播学博士 · 新媒体研究</p>
-                <p class="cv-coursework"><span>课程 · Coursework</span>人文社会科学高级研究方法 · 新闻传播学质化研究方法 · 传播学理论史 · 新闻传播学经典选读</p>
+                <p class="cv-coursework"><span>课程</span>人文社会科学高级研究方法 · 新闻传播学质化研究方法 · 传播学理论史 · 新闻传播学经典选读</p>
               </div>
             </article>
             <article class="cv-entry compact education-entry">
-              <div class="cv-date">2020 — 2023</div>
+              <div class="cv-date">2025—2026</div>
+              <div>
+                <h3>伦敦国王学院（King’s College London）</h3>
+                <p>联合培养博士 · 数字人文</p>
+                <p class="cv-coursework"><span>课程</span>Ethnography for the Internet · The Digital Image</p>
+              </div>
+            </article>
+            <article class="cv-entry compact education-entry">
+              <div class="cv-date">2020—2023</div>
               <div>
                 <h3>上海理工大学</h3>
                 <p>新闻与传播硕士 · 数据新闻</p>
-                <p class="cv-coursework"><span>课程 · Coursework</span>R 与数据新闻 · Python 编程 · 计算传播学 · 传播学研究方法 · 网络传播研究</p>
+                <p class="cv-coursework"><span>课程</span>R 与数据新闻 · Python 编程 · 计算传播学 · 传播学研究方法 · 网络传播研究</p>
               </div>
             </article>
             <article class="cv-entry compact education-entry">
-              <div class="cv-date">2015 — 2019</div>
+              <div class="cv-date">2015—2019</div>
               <div>
                 <h3>福建师范大学</h3>
                 <p>数字媒体技术学士 · 游戏编程</p>
-                <p class="cv-coursework"><span>课程 · Coursework</span>游戏程序设计 · 游戏人工智能 · 数字图像处理 · 数据结构与算法 · 数据库原理 · C / C++</p>
+                <p class="cv-coursework"><span>课程</span>游戏程序设计 · 游戏人工智能 · 数字图像处理 · 数据结构与算法 · 数据库原理 · C / C++</p>
               </div>
             </article>
           </section>
 
-          <section class="cv-section" aria-labelledby="cv-experience">
-            <h2 id="cv-experience"><span>实习经历</span><small>Experience</small></h2>
+          <section class="cv-section" data-reveal aria-labelledby="cv-experience">
+            <h2 id="cv-experience">实习经历</h2>
             <article class="cv-entry">
-              <div class="cv-date">05.2025 — 09.2025</div>
+              <div class="cv-date">2025.05—2025.09</div>
               <div>
-                <h3>轻舟智航 QCraft</h3>
+                <h3>轻舟智航</h3>
                 <p class="cv-role">技术项目管理实习生</p>
                 <ul>
                   <li>跟进自动驾驶软件生命周期，协调研发、仿真、测试与交付环节。</li>
@@ -125,9 +126,9 @@
               </div>
             </article>
             <article class="cv-entry">
-              <div class="cv-date">06.2023 — 09.2023</div>
+              <div class="cv-date">2023.06—2023.09</div>
               <div>
-                <h3>锐研数据 RING Review</h3>
+                <h3>上海萌泰数据科技股份有限公司</h3>
                 <p class="cv-role">产品经理实习生</p>
                 <ul>
                   <li>参与 AI 阅读器的 C 端体验优化，梳理信息承接、页面关系与阅读流程。</li>
@@ -137,9 +138,9 @@
               </div>
             </article>
             <article class="cv-entry">
-              <div class="cv-date">07.2021 — 10.2021</div>
+              <div class="cv-date">2022.06—2022.10</div>
               <div>
-                <h3>Moody E-Commerce 上海目荻</h3>
+                <h3>上海目荻 Moody</h3>
                 <p class="cv-role">数据分析实习生</p>
                 <ul>
                   <li>跟踪产品、营销与社媒数据，为业务决策提供分析支持。</li>
@@ -147,23 +148,36 @@
                 </ul>
               </div>
             </article>
+            <article class="cv-entry">
+              <div class="cv-date">2022.03—2022.07</div>
+              <div>
+                <h3>上观新闻</h3>
+                <p class="cv-role">数据新闻实习记者</p>
+                <ul>
+                  <li>与部门记者合作发布多篇数据新闻报道，参与数据抓取、分析、可视化与新闻写作。</li>
+                  <li>报道主题包括上海及全球新冠疫情、航天活动、比特币、超级计算机等。</li>
+                </ul>
+              </div>
+            </article>
           </section>
 
-          <section class="cv-section" aria-labelledby="cv-publications">
-            <h2 id="cv-publications"><span>代表论文</span><small>Selected Publications</small></h2>
+          <section class="cv-section" data-reveal aria-labelledby="cv-publications">
+            <h2 id="cv-publications">代表论文</h2>
             <div class="cv-publications">
               <p><span>2026</span>玩物造址：媒介学视野下电子游戏中空间与地方的发生</p>
               <p><span>2024</span>可计算的感觉结构：数智社会的感觉生成</p>
               <p><span>2023</span>信息图的“黑箱”真实：数据可视化作为一种社会技术实践</p>
               <p><span>2022</span>有图有真相？数据新闻的视觉框架与真实建构</p>
             </div>
-            <a class="inline-link" href="research.html">查看研究与写作 →</a>
+            <a class="inline-link" href="research.html">查看学术研究与写作 <span class="arrow arrow-right" aria-hidden="true">→</span></a>
           </section>
 
-          <section class="cv-section" aria-labelledby="cv-honors">
-            <h2 id="cv-honors"><span>荣誉与奖励</span><small>Selected Honors</small></h2>
+          <section class="cv-section" data-reveal aria-labelledby="cv-honors">
+            <h2 id="cv-honors">荣誉与奖励</h2>
             <div class="cv-publications">
               <p><span>2025</span>国家留学基金委国家建设高水平大学公派研究生</p>
+              <p><span>2023</span>上海理工大学科研先锋</p>
+              <p><span>2023</span>英国萨里大学（University of Surrey）全奖博士奖学金提名</p>
               <p><span>2023 / 2019</span>校级优秀毕业生</p>
               <p><span>2022</span>中国数据新闻大赛二等奖</p>
             </div>
@@ -174,7 +188,7 @@
 
     <footer class="site-footer">
       <p>© <span data-year></span> Liyao Wang</p>
-      <p><a href="index.html">返回首页 ↑ <small>Back home</small></a></p>
+      <p><a href="index.html">返回首页 <span class="arrow arrow-up" aria-hidden="true">↑</span></a></p>
     </footer>
   </body>
 </html>

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "project": "Liyao Wang portfolio",
+  "date": "2026-07-25",
+  "genre": "editorial",
+  "theme": "studied-DNA (jackiezhang.co.za), adapted to dark academic, tactile, restrained",
+  "macrostructures": {
+    "home": "Photographic Overlay",
+    "inner_pages": "Long Document"
+  },
+  "archetypes": {
+    "hero": "Full-bleed portrait with original-photo depth separation",
+    "section_head": "S2 Hanging / S4 Inline",
+    "cta": "C3 Typographic link",
+    "footer": "Ft2 Inline rule single line",
+    "navigation": "N9-derived edge-aligned mast with retained route cluster"
+  },
+  "assets": {
+    "hero": "user-supplied photograph plus generated clean background plate",
+    "tiptap": "user-owned product recording",
+    "cloud": "user-owned prototype recording and captures",
+    "generated": true
+  },
+  "accent": "#8FA6FF",
+  "constraints": [
+    "Chinese-first",
+    "preserve content and routes",
+    "no fake browser or desktop chrome",
+    "no external font dependency",
+    "reduced-motion support",
+    "mobile widths 320, 375, 414, 768"
+  ]
+}
