@@ -1713,12 +1713,6 @@ a:active,
   }
 }
 
-@media (min-width: 90rem) {
-  .project-proof-frame {
-    aspect-ratio: 16 / 9;
-  }
-}
-
 @media (pointer: coarse) {
   .menu-button,
   .inline-link,
