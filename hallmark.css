@@ -450,12 +450,16 @@ a .arrow {
   letter-spacing: var(--tracking-label);
 }
 
+.project-breadcrumbs::before {
+  content: "01 / CONVERSATION REVIEW";
+}
+
 .project-tiptap::before {
-  content: "01 / DESKTOP AGENT";
+  content: "02 / DESKTOP AGENT";
 }
 
 .project-cloud::before {
-  content: "02 / READING AGENT";
+  content: "03 / READING AGENT";
 }
 
 .project-copy {
@@ -535,6 +539,12 @@ a .arrow {
   transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-lg);
+}
+
 .project-proof {
   position: relative;
   min-width: 0;
@@ -561,6 +571,10 @@ a .arrow {
   border-radius: var(--radius-media);
   background: var(--color-paper-2);
   box-shadow: var(--shadow-card);
+}
+
+.project-breadcrumbs .project-proof-frame {
+  aspect-ratio: 2 / 1;
 }
 
 .project-proof video,
@@ -599,6 +613,11 @@ a .arrow {
   border: 0;
   border-block-start: var(--rule-hair) solid var(--color-rule);
   list-style: none;
+}
+
+.fact-row-four {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-sm);
 }
 
 .fact-row li {
@@ -1609,6 +1628,19 @@ a:active,
     grid-template-columns: minmax(0, 7fr) minmax(18rem, 4fr);
     gap: clamp(3rem, 7vw, 9rem);
     align-items: center;
+  }
+
+  .project-breadcrumbs {
+    grid-template-columns: minmax(18rem, 4fr) minmax(0, 7fr);
+  }
+
+  .project-breadcrumbs .project-copy {
+    justify-self: end;
+  }
+
+  .project-breadcrumbs::before {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
   }
 
   .project-tiptap .project-copy {
