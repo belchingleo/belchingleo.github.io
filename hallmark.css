@@ -573,10 +573,6 @@ a .arrow {
   box-shadow: var(--shadow-card);
 }
 
-.project-breadcrumbs .project-proof-frame {
-  aspect-ratio: 2 / 1;
-}
-
 .project-proof video,
 .project-proof img {
   inline-size: 100%;
