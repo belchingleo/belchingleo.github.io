@@ -286,6 +286,28 @@ main {
   line-height: 2;
 }
 
+.hero-profile-link,
+.cv-profile-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 2.25rem;
+  margin-block-start: var(--space-md);
+  border-block-end: var(--rule-hair) solid var(--color-rule-2);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+}
+
+.cv-profile-link {
+  min-height: 2rem;
+  margin-block-start: var(--space-xs);
+  font-size: var(--text-xs);
+}
+
 a .arrow {
   display: inline-block;
   transition: translate var(--dur-short) var(--ease-out);
@@ -1417,6 +1439,8 @@ a .arrow {
   .site-nav a:hover,
   .project-copy .inline-link:hover,
   .inline-link:hover,
+  .hero-profile-link:hover,
+  .cv-profile-link:hover,
   .download-link:hover,
   .text-links a:hover,
   .site-footer a:hover {
@@ -1468,6 +1492,8 @@ a .arrow {
 .site-nav a:active,
 .project-copy .inline-link:active,
 .inline-link:active,
+.hero-profile-link:active,
+.cv-profile-link:active,
 .download-link:active,
 .text-links a:active,
 .site-footer a:active {
@@ -1744,6 +1770,8 @@ a:active,
 @media (pointer: coarse) {
   .menu-button,
   .inline-link,
+  .hero-profile-link,
+  .cv-profile-link,
   .download-link,
   .text-links a,
   .site-footer a {
