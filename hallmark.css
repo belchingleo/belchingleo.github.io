@@ -567,6 +567,12 @@ a .arrow {
   gap: 0 var(--space-lg);
 }
 
+.experience-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-lg);
+}
+
 .project-proof {
   position: relative;
   min-width: 0;
