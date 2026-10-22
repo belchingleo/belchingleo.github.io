@@ -25,8 +25,8 @@
 
 - Full-bleed photographic hero: the existing window portrait sits behind the typographic introduction.
 - On precise pointers, a clean background plate, the original person, and near window details move at different depths. The person always comes from the original photograph rather than a generated likeness.
-- Selected work is a sequence of two asymmetric diptychs.
-- Tiptap and 云文献 use their real silent recordings; supporting text sits in a narrower reading column.
+- Selected work follows three asymmetric diptychs: ChefJeff, Breadcrumbs, then 云文献.
+- ChefJeff uses its real gameplay screenshot, Breadcrumbs its existing overview, and 云文献 its real silent recording; supporting text sits in a narrower reading column.
 - Project metadata behaves like margin notes, not badges.
 
 ### Experience

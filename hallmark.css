@@ -472,12 +472,12 @@ a .arrow {
   letter-spacing: var(--tracking-label);
 }
 
-.project-breadcrumbs::before {
-  content: "01 / CONVERSATION REVIEW";
+.project-chefjeff::before {
+  content: "01 / HUMAN–AI COLLABORATION";
 }
 
-.project-tiptap::before {
-  content: "02 / DESKTOP AGENT";
+.project-breadcrumbs::before {
+  content: "02 / CONVERSATION REVIEW";
 }
 
 .project-cloud::before {
@@ -645,6 +645,8 @@ a .arrow {
 }
 
 .fact-row li {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   padding-inline-end: var(--space-xs);
 }
@@ -1658,24 +1660,24 @@ a:active,
     align-items: center;
   }
 
-  .project-breadcrumbs {
+  .project-chefjeff {
     grid-template-columns: minmax(18rem, 4fr) minmax(0, 7fr);
   }
 
-  .project-breadcrumbs .project-copy {
+  .project-chefjeff .project-copy {
     justify-self: end;
   }
 
-  .project-breadcrumbs::before {
+  .project-chefjeff::before {
     inset-inline-start: auto;
     inset-inline-end: 0;
   }
 
-  .project-tiptap .project-copy {
+  .project-breadcrumbs .project-copy {
     order: 2;
   }
 
-  .project-tiptap .project-proof {
+  .project-breadcrumbs .project-proof {
     order: 1;
   }
 

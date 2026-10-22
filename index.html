@@ -14,7 +14,7 @@
     <link rel="alternate icon" href="assets/icon-16.png?v=2" sizes="16x16" type="image/png" />
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2" sizes="180x180" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="hallmark.css?v=20260726-10" />
+    <link rel="stylesheet" href="hallmark.css?v=20261022-1" />
     <script src="script.js?v=20260726-6" defer></script>
   </head>
   <body class="home-page">
@@ -67,6 +67,47 @@
         </header>
 
         <div class="project-stack">
+          <article class="project-card project-chefjeff" data-reveal>
+            <div class="project-copy">
+              <div class="project-meta">
+                <span>开源游戏 · 人机协作实验</span>
+                <span>2026</span>
+              </div>
+              <h3>ChefJeff</h3>
+              <p class="project-lead">把人与 AI 放进同一间厨房，观察协作如何发生。</p>
+              <p class="project-description">
+                与大模型驱动的厨师 Jeff 一起切菜、烹饪、出餐，在限时订单中协调分工。
+                通过可配置关卡、对局记录与离线回放，为研究实时人机协作提供可扩展的实验环境。
+              </p>
+              <p class="project-note">Python · Cocos Creator · 公开测试版 0.6.0-beta.2</p>
+              <div class="project-links">
+                <a class="inline-link" href="https://chefjeff.online/" target="_blank" rel="noreferrer">在线试玩 <span class="arrow arrow-ne" aria-hidden="true">↗</span></a>
+                <a class="inline-link" href="https://github.com/belchingleo/ChefJeff" target="_blank" rel="noreferrer">GitHub <span class="arrow arrow-ne" aria-hidden="true">↗</span></a>
+              </div>
+              <ul class="fact-row" aria-label="ChefJeff 核心能力">
+                <li><strong>180s</strong><span>每局实时协作</span></li>
+                <li><strong>3 张地图</strong><span>配置驱动关卡</span></li>
+                <li><strong>Replay</strong><span>离线回放与分析</span></li>
+              </ul>
+            </div>
+
+            <figure
+              class="project-proof"
+              data-caption="真实游戏画面 · 在线试玩需自备模型 API Key"
+            >
+              <span class="project-proof-note">与 AI 一起出餐</span>
+              <div class="project-proof-frame">
+                <img
+                  src="assets/chefjeff/gameplay.png"
+                  alt="ChefJeff 真实游戏画面：玩家与 AI 厨师 Jeff 在同一间厨房里协作完成牛排和汉堡订单"
+                  width="1600"
+                  height="1000"
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+          </article>
+
           <article class="project-card project-breadcrumbs" data-reveal>
             <div class="project-copy">
               <div class="project-meta">
@@ -104,52 +145,6 @@
                   height="887"
                   loading="lazy"
                 />
-              </div>
-            </figure>
-          </article>
-
-          <article class="project-card project-tiptap" data-reveal>
-            <div class="project-copy">
-              <div class="project-meta">
-                <span>独立产品</span>
-                <span>2026</span>
-              </div>
-              <h3>Tiptap</h3>
-              <p class="project-lead">受端到端自动驾驶启发，把窗口与用户行为作为小花生生活的Prompt。</p>
-              <p class="project-description">
-                Tiptap 是一个低打扰的桌面宠物。它持续读取窗口、Dock、鼠标和输入节奏，
-                在桌面地形中形成漫游、攀爬、居家、受惊与陪伴等行为。
-              </p>
-              <p class="project-note">
-                独立完成产品定义、交互与测试；使用 Codex 进行 vibe coding。
-              </p>
-              <a class="inline-link" href="https://github.com/belchingleo/tiptap" target="_blank" rel="noreferrer">GitHub <span class="arrow arrow-ne" aria-hidden="true">↗</span></a>
-              <ul class="fact-row fact-row-four" aria-label="Tiptap 当前状态">
-                <li><strong>0.1.0</strong><span>Developer Preview</span></li>
-                <li><strong>290 / 290</strong><span>自动化基准</span></li>
-                <li><strong>80 / 80</strong><span>场景回放</span></li>
-                <li><strong>Local-first</strong><span>隐私边界</span></li>
-              </ul>
-            </div>
-
-            <figure
-              class="project-proof"
-              data-caption="Inspired by Barnaby Bars in London · Built with Codex · Running locally"
-            >
-              <span class="project-proof-note">桌面上的小型生命</span>
-              <div class="project-proof-frame">
-                <video
-                  autoplay
-                  muted
-                  loop
-                  playsinline
-                  preload="metadata"
-                  poster="assets/tiptap/tiptap-demo-web-v2-poster.jpg"
-                  fetchpriority="high"
-                  aria-label="Tiptap 在 macOS 桌面中漫游、攀爬并响应用户行为的静音演示"
-                >
-                  <source src="assets/tiptap/tiptap-demo-web-20260727.mp4" type="video/mp4" />
-                </video>
               </div>
             </figure>
           </article>
