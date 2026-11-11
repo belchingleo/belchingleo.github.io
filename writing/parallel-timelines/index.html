@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>如果能预知未来，模型还会选错吗？</title>
+<meta name="description" content="在实时人机协作做菜游戏 ChefJeff 中，用游戏引擎的平行时空推演把每个选项的后果告诉决策模型，看 Jev、Parallel、Perplexity 会不会因此改变选择。">
+<meta property="og:title" content="如果能预知未来，模型还会选错吗？">
+<meta property="og:description" content="一项在实时人机协作做菜游戏中，用平行时空推演测试决策模型的实验。">
+<link rel="icon" href="../../assets/icon.svg?v=2" type="image/svg+xml">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+@font-face{font-family:"ChefJeff Pixel";src:url(data:font/woff2;base64,d09GMk9UVE8AABVEAAsAAAAAOuQAABT2AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAADeERBmAAhzQBNgIkA4IoBAYFhSYHIBckGIIGGxw6IxEmpNUeRckeTUVRpkajwH9J0CquG77ag2ElRQlUu0FrAdWTUS90YBheKMpwaR9xR99jv3P+y0do7JNceP5b4zf3zex+U4vuSQVoYpY4HX5ouMrwefrzkU4n4RVCujWj9W80Rub2ey+vSURQ0VDIjHomxtloNKZ1oi/U3erc1uAv/aMUbeIfb/e2DwGPBpL5QAIKdIqZBJ6X/x8FE9f8eZ0PLBKsQaYdOK0Oiub5GmitUXbNceoOwRtR4PO7+E/6dNuzDK1fMPgmy1aYZFI9kNqJLn4Ii5fw40VYvIQf79V+rzNRu8ENkEsc0EtUZCSBdHf34SAE90KIBSBbY4CMrK5xNL7S/amXrfCqVtf/WlrS0aaaCxEdckRmBjAiQ3T73//9vT090nlaPTorVq0khxC7R6sLUXLO8MrU9JDL0IAD6zZELYMTR11Of+2HV9a6fa0h4ANB1CGz/z+nns8OCkmgrodpisDdmxBebf5HDvKb250/WzC+KuHn8me29fOTx6pQQyfp+8NLqbIBsDhx48WACQsodpy48eInSJgoyfDI6Nj4xGAK2fIVK1eNI9FYQmJSckpqWnpGZlaOOumsi6666a6HnnrprY/effsPWDjhhhcMOAiQoECDAQsOPASIJZFUMBCgwICDAAlyEHIooIQKaHhkdGx8omQpU6fPmDlrjnGKc1ziGre4xyOe8Yp3fOIbv/gnIrY4i7t4C004IkqdSRuQvg0ZBS8qGjoGAjJSL1SkG7rEUArPYWEa/LiaZf2bZbyYWNjwiD1SFIoUZI8wlEpD9DzPt8O6XLMvjKzsRUIiveEhKDPHlsklaEfBrjKnaUpuzyqNEocDY/7asd9CIIFXJ8R604Zo7a3YT7DIuKB51w+7ixKhHD/9uqwquMpzo5Ebc1bItcQgQJIUufXlOKbGS9j7IDeadTz1Ka5/NkqsEE4ThOlYaDQIIVv7vgU4MslrosKPXK1tHbbel9Fdzv2yoH3gX4AO4ECC0ZXoJgwxXgR+NbYTdGbJmURSwQDPZBRH/0+3hormXECzwnPK36Xp4zp8YDdxKSmRZfMBsmL+iXRWTmjMJxZZlKnnwB8pkKTUSEHu8lvHa4+O6HI9pef6a4pNpflbNdYh65/tb0ftRvvn0OVwwTHTceOEOjU5TTgFzpnOOefzLoMut1y+u05wU3Frcmtyu7tnuDfcr3jEevQ8IYSJ2nsJV0RfnTydA6QQ3VnSH7lMX4Myy0DPoJV6Tgs03KY90IOMuhloxlzjN8xKFoo11fQu291sDydsfpZraZFu8YGXZrnI++Hzrc4IfKB1IVo4DXVflG69JHoX59t8lATYVko+pQK7ozJf+215xOGMItVxTElzojpdV8U4n1BTXQ6qb6g/ab5I/q3/v+rf86sW7wQTHZkQ7FERMoIRuygCKaW7bNZEmf2r9i7BLrthK1VFku6lNnwTXN+nUGjC5hHtNQrswWtGT4oRaBmJmzL3Hu961GesYfSBB1PutDpSo+m+s5rf30wymD1aqPu41Zy5Q82eXm0yGbqjL4zKHgmSzP6T3Qfp2r9HeCTP/KrXTOYhjhtkUreot9wnZ+aPsaAd9iP7Gj0SvzeLf9XM0rrgQb7RPYdayti/TJMwIwqRkTaTEGMWOfVOZJRreJZZ04jLHfHDgpZom8zKJCOkwt8Nv3/rf/V9V1dG6/iNkxhlhLb4SstowGczvYFIpbae9EYUvTPAiLNDqb7QBHkk73l/Ofi+DqemfsbcjSzGbYr0T7Crk79JV2WYxPc+mN4+G9Hd97zjxvf1fksazjPl98F6IYZ6q87tosa+6Y3Jbfb3eJ+t6cX/loDcnZlkXbBC23Kvxu59R0Ya3Ygvl76hN+zzM5HKpHCjIqNJivT8NI6zur99uNc1ko4IXWeqtpyHp0Q3TcxHpnie+kenY6zpzsvcm4BuEVJmVNseUqnvhAl9kIftkq5QXiqfwGNt+bCgx+XfvsGwAHNtS4FUKaaiOTA7FpVtHTmkitvV3Y4q8HauJHF6pcBB9BlOCvIv739M38RQHCcKVBKsEzKPU3LBrTmLVu75MzDlH43ehz0p3NRbdFMt9V3GzA+QGSkTU8YI7fEwLDB5DFjh2f0OEQEDqqN6sZBpYUfTPgKq7+ORtH0wk0NoT9N+245YYAox6w6eH92NzmiKP+pz400nxv6MvnyG42xhPDH/Fo0e4u/i3Y9X4CjqMAEAwNWCH9TXglnWYe9z3+gb3Cq8/+XxCEioJmfPgiZYUY8QuXvXJ4pypiZTfumbZRFaMhsBgkG6dQYkoLhqCVda+cJxFR7zZOZuPDUu1bjAopVZuWLdJKvyd0ZbdghTXspKnUnde1WGjY4NASBygfR/NrsXjY/0agdumey5TF/cDpTMR5YAYKc9GXN0UkVhSKz9I42O967alIK4BefudHT38dE6ZWZML3+fLvs2pWLZEllYus0EN341kMO9k5IWTRcKsYxfuxyGPb/1el8Td9oDvfpoyRbIg3EK21DA0d+d+yHUOXRAr/f1TV9CPxv3rlTcLbRMt3Lptclf3dobUeENHxWcPvv9QnhB/oYPdYZ97u5lkk/aolilLcYKRtPqnsnfI4kMOBXPgJZToGx67DUoMOhA35+skCK01gCETWgq0olDFpFU6uJ2NJJdo1NxGToBgxOcUEhWldFJ8G/yM8X7B1aVkTY3vghFDJGgaWRmvW2Ok2hzKlKG8khIj7eIuRd6YxRhjMZMghFdlQYQVSjeRtx7bZUVD0m+zKSjrosItlKGIA1RPaD7Tca+C4wvIkYd0n2tsFoOJ9ZCCEcDfE7gArmuD9+dDa2FT316NLe6Nwryz7HsJITUA+cZCikKMLktuG74Wc8Qu3KXgV75qFG7iINV+jDcHv0m72Na769vFnd/Q0RZ6MXI832B38PdLTfI0vuIIwrK4hhCHGT/nW9kWu8fnemraMjSBmrjOWwdAwc7shDkWNieraZ1PvKT2C+emjr1u0W8U3wzMLLr4O6ht5BRbYLATLql4k4MporNvkLz3Pejf3821J7MqvuOLhir7LCdSPQp1Yjq0WYtlZPlNZBG7WvbRMxUkmAcdwNfnk+RkTawCLQIIEbFPUG9gxTm5a402db9FEiSd/0Nz11lhh7lHwpiVZ948IYGRCYod9Jb0qJPGGWWc4EaRMy4he0MJ4iJoWxhXyg7cEp8A/yReGf00x+nZC4HOxv0itKtgdmn3ikv92bSbE+C8/IljYAdrBztAXQVyM3KFsc6ELwd+wcnvG2QQIS6rJB7eGJ8kKinhaqC5OddlO/ZqNPZ5CCy/RmtAEvGMAcOeNwdejf0atSrcYkcPvL9+EZ9atfPWvG95EGVplZDLstMO1Mvnxm+qiJMgEDGlUthWd0naxQ3lNAs/AgIRRwICBMPaCs6Ao4hsFu3fL+Qnyga+ELlfu6neE/o2TkqXoRkeE8ozLRFH/WEYvLMliqzTigO7M3KgC9S7QaRA+ef33PvKkR0klmcv6cdaX6hzEsKuKNJiMm+FOPvT9AW+8CZSZpfbeHL+TMtpb3Jb2qMq6WR//miu3fZ4RqCisHDGxNcERUJEtpwlXGfK5GAtz4TzRRSfLio5jEeMdUdf5ZvOsyLQUYfBxJ3/gwZFDXmzjlzrA+MUPHF91pavGoEGaRD0NqVj4b5Ld8UY/smm2Tl07PuPN1bGVxVidBNzkhzh1AbfIRhmmlHh3+62wu0qn0COmCjVSf7wivNVZk1Q2uaSvs+uGMqIZ/pySXebcLNVD0JWaaMLVT78hmhNJw8h11bnw4kxm5k5kg6mpWu6NEtAElfJthYH2fUcAH19RiOL7WLEBJprWWXSjReGbx9hAvEe4x8Uufm0f/17kbxjv3NNkuwKUpGMj40wQznWOCQBQCAssh7Sxz2Z1HK3a0oqPnCJdx28riC67qYYq08QxJrdjSZg9fiAgBoqU98f3i/phLYHvBOGZt4hQK7v1KXGDGzr/k0c689KM1Dac1tXc5kjSj7z3P03u0DIznqgvmWqxEtTEzZGFy7wLlkpUwQvHBp65/dLtg1957KC2Q+nEy1KalU5msulp8VziZrkj4hD2VF5G3P5lRP+mBLg1/Mch7JHJpoWSad7hUeTMusFcA0uRhPNBcu+dCYviS3tPTqu3dVvSDGZV9GjHvIrpontMfqyHXbcl/Yy+SxP5K21KTmTQcf48+nbCaRDFmjXjPjeW+KnUAkMdpvNYx2Q4J7orXFVJQ1mZTefkOXPzyg8p4HoC7AUYYlZh2y6b4md/SEa7f2JblTG9KcmYAbdxj2Re0RUubLI4JasB/OS5OB3cMZDXN5rpA16wm8vwC6p5nLCKRUa42Nq/ROql73GQpvHmiJna65zB7Zh8mxLleBRwavOyXGrra+5QsNPy0KiRKYVd0H8pOm9peK4LSoBVvibbI6in8sSZYaS8hUjTSXKRT5BvcgQGhil4WmT8904b5yV9eBXQUJP19LvVhxCViD+W53fTTky1apPPQxLX0QoeGlVwm5GEPrTdlrqCpyTm0hijpUGVCHLIMYbUXhp9rkKu5nf0fKK4VXyPve35PvsoRBAVULcUQ+UBSm1A69Wz4KOpY5PmnNgTAUEgg/PmkEmSDsJXB/vcoH2yvMeUMqqRGXiEFFH7EbQadsFKDCicx4nq11MkLBJH9FcNfOyVYy2S6w4fVsczfylie2FmilIvH6DdXvu6X9MJJoDJppKSkBcMomlKknVHmZ2qSpDvUO9KK9fiFHzOqQNFehONLMF8jni6Rf5SjvmhaElG6JxyZOIibLBVWVLx0BrpymzQrA+TW7NZRVJZGBIPGTMbPu75N6BbOpUYVd9VkfxbV4E8byKdzNUiMReac9iav8wfZgMUEQ2v1LKVUy4Oimq6O9hDbTsjSqGskb8eXJFsohe1qq7zGhZKXtqOihwREIquVeBWEWtUoe/RFZ/IDUAIAxB9ZIyDxRcaG+oFhP0VsBhWVJAB5orcr1Z45NqPCwuKKUjBWtWSb+pJsq59K/dTUlistKnbUf6CHuwYfjQh6JlIEbKhThQzdcWLDQUaLlaj3TC+e5Z3dLKVms9+VLNWuM+G2mVsIZIDQ0lUEeoOxktvPBUQlEUVh3yxUudgbdzFAKjfbEKGKK2J3Idfqr95y37apvyhPwK7sjCRkA/9T5SGX0Y4x4MEWdcHdb8DW9CvOT+ovLUCsZadlYhuOjltWlu0bKYoP+CmxNq9uxP6R+2J74meyqx7A1Qi/xsRaAnumT+sDFdH6VY8NlqYFPNDSxNEMazQjju6P3HlyOqhgYePGPF8kHEsjRAz8YLjaQgLbAj9wuoEo8g/AJGd4nyuAtC+JTU6FeqZWhZQZ9pZb5ChRi0ta+qru3/D/KKj3sp1DgxNVD3hbsFgxnlQ6WFdS6D0qc1XVzuSD0pjmQIqGWyS1zqEfyIvR2KKm9cwFGt3gPT1h690zuPQI9SoV+bQ2Cdunycm7jDNyXedGKGHmHkgKmqfVtEPxhN2R22iP9uVLoicsf3tPiX3OXiHTOjnqmZry4UKOpAYawJd149angDSBQl/rYnDZqlkSzE51YNtGHCyUxm+okmU7vrl0aJb3u1C9vGQWkjgAjsfiWUO9VNp+oYA6tmvDPTH1JhxdqbUgiWbU6ETxUUugTAIbxMxw9B8Eg7pDvRYrelXF5/T+k6PFgYwBqNGvlgTHOnuvlrN39o5sgGEmzaFbAcsqc6cNQqfMnE/ce/fmSRIDSWrnP4g6DJmE7hSIFrqiuUQU8XA6Tz83WhGaLRDAV9AFveZm0MvCEIr68WpQJ/CuztRhGrZpI2J0W/cNFA8CJwLxupkBMD4s1RqAAYay6z9ioEB8n9FduyYFsXAaz8aHNe5XNzjWFkYnG+c02yX7WrMw/3L9BoFDWIOsi0ka9D38xStfl2NRHTK/mZ22yxRh+hAAe6/Je+8e7+1ic6aRkvFWU1A6kg4cSX3jWWI5C+YLLp7ogRg1opf3t1pkZI1032zwPXHAfHrOwPUXx9x+7D3Vv+gQaZR+gl95L6l5KFAldMSnc/ayPgJnnF1dYTgDawpnhTATHW+/f8+jn3vT/dDy2bQRD/iwSoHSNoSuU8co9H8CBivSEhaC0OvK/5j9EKVVEh1FafbJ0jYVEoqBWvmqgE9X6+r+vJ+bDDIIEiZFMRDItPJUTCnTgAtyAP7AFziARMEELCIIFuAaeooPRgRgaNhELY9OxrdgY9oXLxIXgFvBE/AJ+if9AcCUEEFpIB9I/ciK5maqnPxlFzE8sR9Zk1jdeEa+Jd+T38xcEaGGO8JsoQ/R/xEmcLBaKRyR8GQpGwUL4PHxFPiZfKXyRvFzH3NS8mrxHvkv+0wLfwrNFU4uKim4W+1b8V75qqLNKbJWOmqPrBCnT3MueoWfX4aTX+870BnUf+poiSv6Oq+Nlf1fDoCJ5zhSFYebl7pS/JJPK3zGoxNv/I8//ejvZKP1fuP/1AmmLskPawbZd26b1ffPT5tXNg5tre84et5faC9+imm/Xz6zdX9vbnrRTbX+bsPxf/by6rHlfWdGUNGOajgvefFZj1IKnxMm6PCySC3+n6vIB493JurRqbFeKkXwysi4JH+0NtcXNh/FYXMxucDuwNXLvy+6aO089y4KGQD9g9NE8T5tz28TWceOIjWgtsQJzn+lW+7p2jYmugcvKCywLVPNe5xzJ2ZejyvqZeQzZiSQQBeKUsQyzZc0yhLRY/EPkIFLKNyJ4Stmrmu9nHp3u7SlY6FeENhsU8NZ0bW9Jz0dkz4L/I4bQL+q7VkZ6dgMxQg4y9o+Y9pbeKVn/p55+FB+3QAQslljpUDonOjKwkRNPOEGqCRe2O2jfORvKSXCLp5+JOjuZwj0qU5sYzUyjMxWZFt+cfk1bZz6oMAVEoSxSYhI5II74nEC8efLmzRWEgAtGpiAn0mN8FnMisgXzMDlaYfmuO752pHNCsPmkwqZSIDhClt0seYfv+yreTIZtC3CFdRIhDiqXa6RyF4JBquCC/Na4nxshXrwhCiQma3aoqMnRN1y9sSIS7Ky4rybbpzGxXPJ7Ngu9oFuEW8ncinI7z+2pCYmp68u9Vn7OcQNmPudAz4E2A3eWl6m6o9TrHXn10j+k6kq11Abl8kO01nTU/CvpydvnN32Kva79aBAAAAA=) format("woff2");font-display:swap}
+/* Layout: one long reading column on paper, set into the ChefJeff kitchen frame; square corners, hard shadows.
+   Colors and type come from the ChefJeff 厨房 UI design system (single "kitchen" theme, chosen on purpose). */
+:root {
+  --surface: #f0d9b5; --paper: #fdf3e1; --honey-tint: #fbe3b8; --ink: #2b1a12; --muted: #6e4e38;
+  --walnut: #6b3418; --frame: #4a2616; --frame-line: #3f2112; --honey: #e8983a; --denim: #2a5a9e; --jeff: #a8520e;
+  --series-off: #b27a3f; --series-on: #2a5a9e; --series-wait: #8c7a6b;
+  --pixel: "ChefJeff Pixel", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+html { background: var(--frame); }
+body { background: var(--frame); color: var(--ink); font-family: var(--body); }
+.frame {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+  background: repeating-linear-gradient(90deg, var(--frame) 0 46px, var(--frame-line) 46px 48px);
+}
+.masthead, .article { max-width: 760px; margin-inline: auto; }
+.masthead { padding: 8px 0 28px; color: var(--paper); }
+.kicker { font-family: var(--pixel); font-size: 12px; line-height: 16px; margin: 0 0 16px; letter-spacing: .08em; color: var(--honey); }
+.masthead h1 { font-family: var(--pixel); font-weight: 400; font-size: 36px; line-height: 48px; margin: 0 0 16px; text-wrap: balance; }
+.dek { font-size: 17px; line-height: 28px; margin: 0; color: var(--honey-tint); max-width: 38em; }
+.article {
+  background: var(--paper); border: 3px solid var(--walnut); box-shadow: 6px 6px 0 var(--ink);
+  padding: 40px 48px 48px; font-size: 17px; line-height: 1.85;
+}
+.article p { margin: 0 0 1.1em; }
+.article h2 {
+  font-family: var(--pixel); font-weight: 400; font-size: 24px; line-height: 32px; margin: 2.2em 0 .9em;
+  padding-bottom: 8px; border-bottom: 3px solid var(--walnut); text-wrap: balance;
+}
+.article h2:first-of-type { margin-top: 1.4em; }
+.article h3 { font-size: 17px; font-weight: 650; margin: 2em 0 .6em; }
+.article hr { border: 0; border-top: 2px dashed var(--walnut); margin: 2em 0; opacity: .5; }
+.article strong { font-weight: 650; }
+.article a { color: var(--denim); word-break: break-all; }
+.article a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.tablewrap { overflow-x: auto; margin: 1.4em 0 1.6em; }
+.article table { border-collapse: collapse; font-size: 15px; line-height: 1.6; min-width: 100%; font-variant-numeric: tabular-nums; }
+.article th, .article td { border: 2px solid var(--ink); padding: 6px 10px; text-align: left; vertical-align: top; }
+.article th { background: var(--honey-tint); font-weight: 650; white-space: nowrap; }
+.fig, .tbl { margin: 1.8em 0 2em; }
+.fig { border: 2px solid var(--ink); background: #fff9ee; padding: 16px; box-shadow: 0 3px 0 var(--ink); }
+.fig figcaption, .tbl figcaption { font-size: 14px; line-height: 1.7; color: var(--muted); margin-top: 12px; }
+.tbl figcaption { margin: 0 0 4px; }
+.fig figcaption b, .tbl figcaption b { font-family: var(--pixel); font-weight: 400; font-size: 12px; color: var(--ink); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { display: inline-block; width: 12px; height: 12px; }
+.sw.off { background: var(--series-off); } .sw.on { background: var(--series-on); } .sw.wait { background: var(--series-wait); }
+.chart svg { display: block; overflow: visible; max-width: 100%; }
+.chart .panel { min-width: 0; }
+.chart.pair, .chart.grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+.chart text { font-family: var(--body); fill: var(--ink); }
+.ch-title { font-size: 13px; font-weight: 650; }
+.ch-label { font-size: 12px; fill: var(--ink); }
+.ch-label.strong { font-weight: 650; }
+.ch-axis { font-size: 11px; fill: var(--muted); }
+.ch-value { font-size: 11px; fill: var(--ink); font-variant-numeric: tabular-nums; }
+.ch-grid { stroke: var(--ink); stroke-opacity: .12; stroke-width: 1; }
+.ch-zero { stroke: var(--ink); stroke-opacity: .45; stroke-width: 1; }
+.ch-target { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.ch-link { stroke: var(--muted); stroke-width: 2; stroke-opacity: .5; }
+.ch-dot { stroke: #fff9ee; stroke-width: 2; }
+.ch-mean { stroke: var(--ink); stroke-width: 2.5; }
+.chart [tabindex] { cursor: default; }
+.chart-tip {
+  position: absolute; z-index: 20; max-width: 260px; background: var(--paper); color: var(--ink);
+  border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); padding: 4px 8px; font-size: 13px; line-height: 1.5;
+  pointer-events: none;
+}
+/* Figure 1: an order-ticket view of three options */
+.ticket { border: 1px solid var(--ink); background: var(--paper); box-shadow: 0 2px 0 var(--ink); font-size: 14px; }
+.ticket-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 8px 12px;
+  background: var(--walnut); color: var(--paper); font-family: var(--pixel); font-size: 12px; line-height: 16px; }
+.ticket dl { margin: 0; }
+.ticket dl > div { display: grid; grid-template-columns: 9em 1fr; gap: 12px; padding: 8px 12px; border-top: 1px dashed var(--muted); }
+.ticket dl > div:first-child { border-top: 0; }
+.ticket dt { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.ticket dd { margin: 0; font-family: var(--mono); font-size: 13px; min-width: 0; overflow-wrap: anywhere; }
+.ticket .picked { background: var(--honey-tint); }
+.pick { font-family: var(--body); font-size: 12px; background: var(--ink); color: var(--paper); padding: 1px 6px; margin-left: 8px; white-space: nowrap; }
+/* Figure 2: the fork into parallel timelines */
+.fork { display: grid; grid-template-columns: 1fr auto 1.6fr auto 1fr; gap: 12px; align-items: center; }
+.fork-arrow { font-size: 22px; color: var(--muted); text-align: center; }
+.fork-now, .fork-out, .branch { border: 2px solid var(--ink); background: var(--paper); padding: 10px 12px; font-size: 14px; line-height: 1.6; }
+.fork-now, .fork-out { display: flex; flex-direction: column; gap: 4px; box-shadow: 0 3px 0 var(--ink); }
+.fork-out { background: var(--denim); color: var(--paper); border-color: var(--ink); }
+.fork-out .tag { background: var(--paper); color: var(--denim); }
+.fork-branches { display: flex; flex-direction: column; gap: 10px; position: relative; }
+.branch p { margin: 0; }
+.branch .result { color: var(--denim); font-weight: 650; }
+.branch .result.none { color: var(--muted); font-weight: 400; }
+.branch.dim { border-style: dashed; }
+.tag { align-self: flex-start; display: inline-block; font-family: var(--pixel); font-size: 12px; line-height: 16px;
+  background: var(--ink); color: var(--paper); padding: 2px 6px; margin-bottom: 2px; }
+.ahead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 16px; padding: 10px 12px;
+  border: 2px dashed var(--ink); font-size: 14px; line-height: 1.6; }
+.ahead .arrow { color: var(--muted); }
+.refs { font-size: 14px; line-height: 1.7; padding-left: 1.6em; }
+.refs li { margin-bottom: .5em; }
+@media (max-width: 720px) {
+  .frame { padding-block: 16px 40px; }
+  .masthead h1 { font-size: 24px; line-height: 36px; }
+  .article { padding: 24px 18px 32px; font-size: 16px; box-shadow: 4px 4px 0 var(--ink); }
+  .chart.pair, .chart.grid4 { grid-template-columns: 1fr; }
+  .fork { grid-template-columns: 1fr; }
+  .fork-arrow { transform: rotate(90deg); line-height: 1; }
+  .ticket dl > div { grid-template-columns: 1fr; gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+</style>
+<div class="frame">
+<header class="masthead">
+  <p class="kicker">ChefJeff 研究笔记 · 2026 年 11 月</p>
+  <h1>如果能预知未来，模型还会选错吗？</h1>
+  <p class="dek">一项在实时人机协作做菜游戏中，用平行时空推演测试决策模型的实验</p>
+</header>
+<article class="article">
+<p>ChefJeff 是一个实时协作做菜游戏，人类玩家和 AI 队友 Jeff 共用一个厨房，一起接单、切菜、煎牛排、装盘和洗碗。Jeff 每做完一步，就把厨房此刻的完整状态、游戏规则和他能做的全部动作打包成一次请求，交给一个“决策模型”。决策模型和聊天模型不同，它不生成文字，只从给定的动作里挑出一个。11 月 10 日，我们在第二关反复看到同一个场面：锅里的牛肉已经熟了，Jeff 空着手站在灶台边，选了“等待”；或者他手里拿着一块生牛肉，旁边就是空案板，他还是选了“等待”。</p>
+<p>请求里并不缺信息。规则写着“盛菜要先拿起盘子”，选项里也有“拿起盘子”，而且换一个决策模型来回答同一份请求，它每次都能选对。所以 Jeff 看到的东西并不比别的模型少，他卡住的地方在于没有把“现在做这一步”和“之后能做那件事”联系起来。</p>
+<p>我们的做法是让游戏引擎（也就是运行游戏规则的那部分程序）替他往前看一步。每次 Jeff 要做决定时，引擎把厨房原样复制几份，在每一份副本里把一个选项真的做完，再把“做完以后能做哪些新的工作”告诉模型。我们把这些副本叫作“平行时空”。选择仍然由模型来做，引擎只提供推演出来的事实。</p>
+<p>结果是，这个办法能让原本推不出后果的模型也做出达标的成绩：TypeSafe 的 Jev 在第二关从 12 局 0 局达标、平均收入 19 元，变成 12 局 9 局达标、平均收入 227 元。但它对本来就会推断后果的模型（Perplexity）没有好处；在实时环境里，它还必须和另一种“时间往前推”的平行时空一起使用，否则推演和等待回复的时间会把收益抵消；而当需要预知的是“搭档接下来会做什么”时，有的模型拿到了也用不上。</p>
+<p>下面依次介绍问题本身、平行时空的做法、它和自动驾驶里“世界模型”的异同、两组实验的结果，最后回到标题里的问题。</p>
+<hr>
+<h2 id="s596714">一、一个站在灶台边的厨师</h2>
+<p>ChefJeff 仿照《胡闹厨房 2》设计。第二关做汉堡：面包、生菜、番茄要拼进盘子，牛肉要先放上案板切好，再下锅煎熟，最后盛进同一个盘子出餐。Jeff 用的默认模型是 TypeSafe 的 Jev。它只从给定的选项里挑一个，并给出每个选项的概率，一次回复大约 1.1 秒。本文测的另外两个模型 Parallel Decisions 和 Perplexity Decider 也属于这一类，我们统称为“决策模型”。</p>
+<p>图 1 是一次典型的请求。第 69 秒，锅里的牛肉熟了，柜台 2 上有一个已经放好面包、生菜和番茄的盘子，Jeff 空着手。这一刻他有 22 个选项，其中包括“从柜台 2 拿起盘子”“端起 1 号灶上的平底锅”和“等待”，他选了等待。再过十秒，没人盛的牛肉就会煎糊。</p>
+<figure class="fig" id="fig1"><div class="ticket" role="img" aria-label="第 69 秒的三个选项">
+  <div class="ticket-head"><span>第 69 秒 · 1 号灶的牛肉已熟</span><span>22 个选项中的 3 个</span></div>
+  <dl>
+    <div><dt>take counter2</dt><dd>Take plate with bread, lettuce, tomato from Counter 2</dd></div>
+    <div><dt>take pot p1</dt><dd>Lift the frying pan from Stove 1</dd></div>
+    <div class="picked"><dt>wait</dt><dd>Wait <span class="pick">Jeff 选了这个</span></dd></div>
+  </dl>
+</div><figcaption><b>图 1</b>　第 69 秒 Jeff 收到的部分选项（原文为英文）。没有一个选项的名字里写着“装盘”，因为只有手里已经拿着盘子时，“装盘”才会出现在选项里。</figcaption></figure>
+<p>在找原因之前，我们先排除了两种更直接的解释。</p>
+<p>第一种解释是请求写得不好读。我们试过两种改写，一种把不变的部分和变化的部分分开、省掉默认值（紧凑格式），另一种把状态改写成自然语言（可读状态）。两种改写下，Jev 的达标局数都从 12 局 3 局降到了 0 局。两种改写有一个共同点，就是都把空着的案板、闲着的灶台这类“没有东西的地方”从状态里省掉了，而这恰恰是 Jev 下一步需要用到的地方，所以改写反而拿掉了它更需要的信息。</p>
+<p>第二种解释是选项太多、太难挑。我们统计了 Jeff 在 12 局里收到的 977 次请求、共 27,454 个选项，每次请求的选项数中位数是 31 个，也就是有一半的请求选项不超过 31 个。其中“走到”“放到”“扔到”某个地点的选项合计占 61.8%，名字里直接写着切、下锅、装盘、出餐、洗碗这类工作的选项只占约 1%。“把生牛肉放上案板”在选项里叫“放到 1 号案板”，和“切”字面上没有任何关系。</p>
+<p>这两点合起来说明，Jev 卡住的地方是一种具体的推断：从“我现在可以做 X”推到“做完 X 以后我就能做 Y，而 Y 是我需要的”。拿盘子之所以有用，是因为拿了盘子以后才能盛菜；把牛肉放上案板之所以有用，是因为放上去以后才能切。这类推断在规划研究里叫作对“动作后果”的推断，也就是知道一个动作会把世界变成什么样。</p>
+<h2 id="s391160">二、平行时空：先替他把每个选择做一遍</h2>
+<p>既然 Jeff 推不出动作的后果，最直接的办法就是由环境把后果算出来。ChefJeff 的游戏规则全部写在引擎里，引擎本身就是这个厨房最准确的预测器，所以我们不需要训练一个模型来预测未来，只需要复制厨房，让引擎在副本里往前跑。</p>
+<p>具体做法是这样的。每当 Jeff 要做决定，引擎把当前厨房复制一份，在副本里执行其中一个选项，一直执行到这个选项的最后一步做完；在这段时间里，搭档按照他手头正在做的事继续做，但不会收到新的指令。做完以后，引擎比较副本里 Jeff 能做的工作和现在能做的工作，把“做完以后能做、现在做不了”的那些列出来。每个选项各开一个副本，最后汇成一张表放进请求，我们叫它“联系表”。选项本身一个字不改，表里只写事实，例如“如果期间没有别的变化，做完以后可以：从 1 号灶盛菜”，而不写“你应该拿盘子”这样的建议，因为选择权要一直留在模型手里。</p>
+<figure class="fig" id="fig2"><div class="fork" role="img" aria-label="平行时空推演示意">
+  <div class="fork-now"><span class="tag">现在</span><strong>第 69 秒的厨房</strong><span>牛肉已熟，Jeff 空着手</span></div>
+  <div class="fork-arrow" aria-hidden="true">→</div>
+  <div class="fork-branches">
+    <div class="branch"><span class="tag">副本 1</span><p>拿起柜台 2 的盘子</p><p class="result">做完以后可以：从 1 号灶盛菜</p></div>
+    <div class="branch"><span class="tag">副本 2</span><p>端起 1 号灶的平底锅</p><p class="result">做完以后可以：把菜盛进柜台 1 的盘子</p></div>
+    <div class="branch dim"><span class="tag">副本 3</span><p>等待</p><p class="result none">没有新的工作，不写进表</p></div>
+  </div>
+  <div class="fork-arrow" aria-hidden="true">→</div>
+  <div class="fork-out"><span class="tag">联系表</span><strong>写进请求</strong><span>选项不变，由决策模型自己选</span></div>
+</div>
+<div class="ahead" role="img" aria-label="时间往前推示意">
+  <span class="tag">另一种平行时空</span>
+  <span>当前这一步还在执行</span><span class="arrow" aria-hidden="true">→</span>
+  <span>副本推进到“这一步做完的那一刻”</span><span class="arrow" aria-hidden="true">→</span>
+  <span>提前发请求，回复和执行重叠</span>
+</div><figcaption><b>图 2</b>　平行时空推演示意。当前厨房分出若干个副本，每个副本执行一个选项，推演结束后列出新出现的工作，汇总成联系表交给模型。</figcaption></figure>
+<p>这套方法里其实有两种平行时空。</p>
+<p>第一种是按选项分岔，回答“如果选这个，之后会怎样”，联系表就是它的产物。第二种是时间往前推，回答“当我这一步做完时，厨房会是什么样子”。在实时游戏里，Jeff 每做完一步才发请求，模型回复的一秒多里他只能站着。我们原先就有一个叫“提前问”的功能：在这一步快结束时，引擎把副本推进到“这一步做完的那一刻”，按那时的厨房提前发请求，让模型的思考和这一步的执行重叠起来。后面会看到，这两种平行时空需要一起用。</p>
+<p>在设计推演时，有一个问题比想象中重要，就是副本里到底应该推演什么。第一版联系表把“走到某处”“等待”也推演了一遍，而推演走路时副本里的时间也在流逝，于是出现了这样的记录：“走到垃圾桶以后，可以从 1 号灶盛菜”，原因只是走路的这几秒里牛肉恰好熟了。这条信息是真的，却会误导模型，因为让牛肉变熟的是时间，走到垃圾桶这个动作和它没有关系。第二版只推演会改变手里物品或工位状态的选项，并让副本共用厨房里不会变化的部分，每次请求的计算时间从约 0.45 秒降到约 0.2 秒。我们用 977 次请求逐一检验，两版的表只在 89 次请求里不同，差别全部出在这类走路选项上。从这件事可以抽出一个一般性的要求，就是交给决策者的预测，需要把“动作造成的变化”和“时间本身带来的变化”分开。</p>
+<h2 id="s425906">三、这和自动驾驶的“世界模型”有什么不同</h2>
+<p>提前在平行时空里推演一遍，并不是一个新想法。自动驾驶领域近两年最受关注的方向之一就是“世界模型”，也就是给定当前的场景和一个驾驶动作，由模型预测之后会发生什么。Tesla 的 Ashok Elluswamy 在 2025 年 10 月把他们的系统称为“神经世界模拟器”，用途之一是把新版驾驶模型接进去做闭环检验，让驾驶模型在模拟出来的世界里连续开车，看它的表现。Waymo 在 2026 年 2 月发布的 Waymo World Model 建立在 Google DeepMind 的 Genie 3 之上，工程师可以用它问“如果当时不让行、开得更果断一点，会怎样”。Wayve 在 2025 年 12 月发布的 GAIA-3 用来离线检验驾驶系统：在一段录下来的真实场景里改变自车的动作，而让其他车辆按录像里的轨迹继续行驶。这和我们推演时让搭档照着手头的事继续做、不给他新指令，是同一个前提。在规划方面，CVPR 2024 的 Drive-WM 让一个规划器先提出几条候选路线，再由世界模型为每一条生成一段想象中的未来画面，最后用感知模型给这些画面打分，选出分数最高的那条。</p>
+<p>棋类 AI 走的是同一条路。AlphaZero 在落子前用已知的棋规在脑子里推演很多步，这种逐层展开可能的走法、再从中挑选的办法叫作树搜索；2020 年发表在《自然》上的 MuZero 把已知棋规换成了从经验里学出来的模型，并且追平了 AlphaZero 的水平。</p>
+<p>把这些工作和我们的做法放在一起，可以看出两点区别。</p>
+<p>第一，我们的平行时空是精确的。自动驾驶的世界模型从大量驾驶视频里学出来，预测总有误差，所以这些研究很大一部分精力花在“模拟和现实是否一致”上。我们的推演直接用游戏引擎本身，和真实规则完全一致，相当于 AlphaZero 那一侧的已知规则。因为预测本身没有误差，我们可以把“预测准不准”这个问题先放到一边，专门研究下一个问题。</p>
+<p>第二，用推演结果做决定的是谁。在 Drive-WM 和 AlphaZero 里，推演之后由打分函数或搜索算法直接选出最好的动作；在 Waymo 和 Wayve 那里，推演主要用来检验驾驶系统，不在车上实时替它做决定。我们既不打分，也不替模型挑，只把推演出来的后果交给决策模型，由它自己决定。</p>
+<figure class="tbl"><figcaption><b>表 1</b>　几类做法里，谁负责预测，谁负责决定。</figcaption><div class="tablewrap"><table>
+<thead>
+<tr>
+<th>做法</th>
+<th>谁预测未来</th>
+<th>预测准不准</th>
+<th>谁做决定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自动驾驶世界模型（Tesla、Waymo、Wayve）</td>
+<td>学出来的生成模型</td>
+<td>近似</td>
+<td>被检验的驾驶系统（推演用于检验，不在车上实时决策）</td>
+</tr>
+<tr>
+<td>Drive-WM</td>
+<td>学出来的生成模型</td>
+<td>近似</td>
+<td>感知模型打分，选最高分</td>
+</tr>
+<tr>
+<td>AlphaZero / MuZero</td>
+<td>已知规则 / 学出来的模型</td>
+<td>精确 / 近似</td>
+<td>树搜索</td>
+</tr>
+<tr>
+<td>Overcooked 上的大模型智能体（ProAgent、HLA、DPT-Agent）</td>
+<td>不单独推演；选完以后由检查器或执行器处理前提</td>
+<td>—</td>
+<td>大模型选高层动作，执行器补细节</td>
+</tr>
+<tr>
+<td>本研究</td>
+<td>游戏引擎（平行时空）</td>
+<td>精确</td>
+<td>决策模型</td>
+</tr>
+</tbody>
+</table></div></figure>
+<p>所以本文真正要回答的问题是：<strong>当未来已经被准确地算出来、摆在面前时，模型会不会用它？</strong> 这个问题在自动驾驶和棋类 AI 里不太会出现，因为在那里使用推演结果的是打分函数或搜索算法；但在“让通用模型做实时决策”的场景里，它是核心问题。</p>
+<h2 id="s618172">四、同一时刻，换个写法再问一次</h2>
+<p>为了把“模型会不会用预知的后果”单独测出来，我们用了一种叫“重问”的方法。ChefJeff 会记录每一局里引擎收到的全部输入，因此任何一局都可以逐帧重放，任何一个时刻发出的请求都能逐字节重建；重问就是把过去某个时刻的请求原样或改写后再发给模型，看它这一次怎么选。我们从一组 12 局的对局记录里挑出三类 Jeff 手上没事做的时刻：锅里的菜熟了而他空着手（下称“锅熟时刻”），他拿着要切的生食材而旁边有空案板（“生食材时刻”），以及不需要推断后果的普通时刻作对照。每类随机抽 10 个时刻，每个时刻在每种写法下各问 3 次。</p>
+<p>最基本的对比是两种写法。条件 A 就是当时真实发出的请求，什么都不加；条件 B 在会带来新工作的选项后面加一句平行时空推演的结果，例如在“从柜台 2 拿起盘子”后面加上“如果期间没有别的变化，做完以后可以：从 1 号灶盛菜”。图 1 那个时刻的 22 个选项里，有 7 个多了这样一句话。</p>
+<p>判断标准是模型有没有选中“能连上目标工作”的选项：锅熟时刻是拿盘子或端锅，生食材时刻是把它放上案板。</p>
+<figure class="fig" id="fig3"><div class="legend"><span><i class="sw off"></i>原样</span><span><i class="sw on"></i>加了平行时空推演的结果</span></div><div class="chart pair" data-chart="reask"></div><figcaption><b>图 3</b>　同一批时刻里，三个模型选中“能连上目标工作”的选项的比例（每格为 10 个时刻 × 3 次）。</figcaption></figure>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>锅熟时刻 A → B</th>
+<th>生食材时刻 A → B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jev</td>
+<td>40% → 100%</td>
+<td>33% → 97%</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>73% → 100%</td>
+<td>7% → 100%</td>
+</tr>
+<tr>
+<td>Perplexity</td>
+<td>100% → 100%</td>
+<td>100% → 100%</td>
+</tr>
+</tbody>
+</table></div>
+<p>这张表里最先要看的是 A 列，也就是不加任何帮助时三个模型的差别。Perplexity 在两类时刻都是 100%，说明在原样的请求里，这两条后果是完全推得出来的；Jev 和 Parallel 推不出来，所以差别出在模型之间的能力上，请求本身并没有把信息藏起来。两个模型卡住的地方也不一样：Parallel 在锅熟时多数能连上，拿着生食材时几乎连不上；Jev 两类都只有三到四成，其余时间大多选了等待。我们猜想这个差别和两个因素有关。锅熟时，“拿起盘子”和“盛菜”在字面上有关，还有“十秒后会糊”的时间压力；而“放到 1 号案板”和“切”在字面上毫无关系，也没有人催。</p>
+<p>加上推演结果以后，Jev 和 Parallel 在两类时刻都接近 100%，在对照时刻里也没有被引去选不该选的工作。也就是说，只要后果写在请求里，原本推不出后果的两个模型就能挑中通向目标工作的那一步。</p>
+<h2 id="s81788">五、让模型选对的，是推演出来的“未来”</h2>
+<p>条件 B 的写法改动了选项本身，被加了一句话的选项变长了、变显眼了，所以单看 B 的结果，还分不清模型是读懂了那句话，还是只是更容易注意到这几个选项。为了把这两种可能分开，我们又加了两种写法。条件 C 在同样那几个选项后面，加一句长短相近、但和后果无关的事实，例如“位置：柜台 1，烹饪区，地图格 (10, 7)”；条件 D 不改动任何选项，只在状态里单独放一张表，把每个选项通向的工作列出来，也就是游戏里最终采用的联系表。</p>
+<figure class="fig" id="fig4"><div class="legend"><span><i class="sw off"></i>没有推演内容（A 原样、C 无关事实）</span><span><i class="sw on"></i>有推演内容（B、D）</span></div><div class="chart grid4" data-chart="arms"></div><figcaption><b>图 4</b>　四种写法的对比（Jev 和 Parallel，每格 10 个时刻 × 3 次）。</figcaption></figure>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>写法</th>
+<th>Jev 锅熟</th>
+<th>Jev 生食材</th>
+<th>Parallel 锅熟</th>
+<th>Parallel 生食材</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>原样</td>
+<td>47%</td>
+<td>30%</td>
+<td>70%</td>
+<td>7%</td>
+</tr>
+<tr>
+<td>B</td>
+<td>后果写在选项后</td>
+<td>100%</td>
+<td>93%</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>C</td>
+<td>同样位置写无关事实</td>
+<td>63%</td>
+<td>37%</td>
+<td>93%</td>
+<td>20%</td>
+</tr>
+<tr>
+<td>D</td>
+<td>后果单独列表</td>
+<td>100%</td>
+<td>100%</td>
+<td>97%</td>
+<td>87%</td>
+</tr>
+</tbody>
+</table></div>
+<p>这一轮是对同一批 30 个时刻重新问的。因为同一个时刻每次问得到的回答并不总是一样，所以 A 行的数字和上一节略有出入，例如 Jev 的锅熟时刻这一轮是 47%，上一节是 40%。</p>
+<p>在生食材时刻，C 几乎没有作用（Jev 从 30% 到 37%，Parallel 从 7% 到 20%），而 B 和 D 都接近 100%，所以让模型选对的是推演出来的内容本身，单把选项标出来并不能带来同样的效果。唯一的例外是 Parallel 的锅熟时刻，C 也到了 93%，说明对 Parallel 来说，“这几个选项被标出来了”本身就能把它引过去，不过它在这类时刻本来就有七成能选对。B 和 D 的效果几乎一样，说明推演结果放在哪里并不重要，重要的是它在请求里。因为 D 不改动任何选项、对请求的改动最小，我们在游戏里采用了 D。</p>
+<h2 id="s337857">六、整局里：谁需要预知未来</h2>
+<p>重问只看单个时刻，整局要看的是这些时刻连起来以后，Jeff 能不能真的把菜做出来。我们在第二关做了整局对比，设置如下：人类一方由一个脚本厨师代替，也就是一个按固定规则行动的程序，它只负责取料、切菜、拼盘、出餐和洗碗，从不碰锅，也不救火；游戏按真实时间运行，模型的回复时间照实计入；每组 12 局，当时的达标线是净收入 200 元，两个脚本厨师配合时每局能挣 400 元。每个模型都比较两组，不开联系表的“基础”组和打开联系表的组，两组的其他设置完全相同（下一节会解释这套设置为什么包括“提前问”）。</p>
+<p>下表最后一列是开联系表与不开时平均收入的差值，括号里是这个差值的 95% 区间。因为每组只有 12 局，局与局之间又有波动，单看两个平均数的差还不知道它有多稳，所以我们用自助法（bootstrap）来估计：把每组的 12 局有放回地反复重抽两万次，每次重新算一遍两组平均收入之差，看这些差值落在什么范围，这个范围就是 95% 区间。区间不跨过 0，说明差别不太可能来自运气。</p>
+<figure class="fig" id="fig5"><div class="legend"><span><i class="sw off"></i>基础：不开联系表</span><span><i class="sw on"></i>开联系表</span></div><div class="chart" data-chart="rounds"></div><figcaption><b>图 5</b>　第二关每局净收入，每个点是一局，竖线是 12 局平均，虚线是当时的达标线 200 元。</figcaption></figure>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>基础组：达标 / 平均收入</th>
+<th>开联系表：达标 / 平均收入</th>
+<th>差值（95% 区间）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jev</td>
+<td>0/12，19 元</td>
+<td>9/12，227 元</td>
+<td>+208（+163 到 +253）</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>1/12，−10 元</td>
+<td>3/12，85 元</td>
+<td>+96（+18 到 +170）</td>
+</tr>
+<tr>
+<td>Perplexity</td>
+<td>12/12，332 元</td>
+<td>12/12，359 元</td>
+<td>+27（−16 到 +67）</td>
+</tr>
+</tbody>
+</table></div>
+<p>Jev 的变化最大：不开联系表时 12 局没有一局达标，平均每局只挣 19 元；打开以后 9 局达标，平均 227 元，差值 208 元的区间下限是 163 元，离 0 很远。这个变化能在关键时刻里看到原因。不开联系表时，Jeff 拿着生牛肉、旁边有空案板的 465 个时刻里，只有 15 次把它放上了案板（3%）；开了以后，57 次里有 53 次（93%）。这里每发一次请求算一个时刻，两组的时刻数相差很大，是因为不开联系表时 Jeff 会拿着同一块生牛肉连续好几次选等待，每一次都被算了进去，而开了以后他通常第一次就把牛肉放上了案板。牛肉熟了去盛的比例也从 35% 升到 85%。Parallel 的平均收入多了 96 元，区间下限 18 元也在 0 以上，但它每局的波动很大，仍然只有 3 局达标。Perplexity 多出的 27 元，区间从 −16 到 +67，跨过了 0，也就是说这点差别在误差范围之内；它本来就能推断这些后果，联系表没有给它新东西。整局的结果因此和重问一致。</p>
+<h2 id="s454590">七、来不及看的未来没有用：两种平行时空要一起用</h2>
+<p>联系表有时间成本。每次请求，引擎要先把每个选项推演一遍，第二版平均约 0.2 秒；在这之后模型才能开始回答，Jev 约 1.1 秒，Parallel 约 1.9 秒，Perplexity 约 1.6 到 1.7 秒。如果 Jeff 每做完一步才发请求，这两段时间他都只能站着等。</p>
+<p>这就是上一节的整局都打开了“提前问”的原因。提前问是第二种平行时空：在当前这一步快结束时，引擎把副本推进到“这一步做完的那一刻”，按那时的厨房提前发请求，让推演和回复都在这一步还在执行时完成。没有它，联系表带来的好处会被等待吃掉。</p>
+<figure class="fig" id="fig6"><div class="legend"><span><i class="sw on"></i>推演联系表（第二版）</span><span><i class="sw wait"></i>模型回复（中位数）</span></div><div class="chart" data-chart="waiting"></div><figcaption><b>图 6</b>　不提前问时，Jeff 每做完一步要等的时间由两段组成：推演联系表的时间和模型回复的时间。</figcaption></figure>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>开联系表，配提前问</th>
+<th>开联系表，不配提前问</th>
+<th>差值（95% 区间）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jev</td>
+<td>227 元</td>
+<td>95 元</td>
+<td>−132（−197 到 −69）</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>85 元</td>
+<td>17.5 元</td>
+<td>−68（−131 到 −10）</td>
+</tr>
+<tr>
+<td>Perplexity</td>
+<td>359 元</td>
+<td>180 元</td>
+<td>−179（−263 到 −97）</td>
+</tr>
+</tbody>
+</table></div>
+<p>不配提前问时，三个模型的收入都明显下降，而从关键时刻的比例看，判断的质量基本保持住了。以 Jev 为例，不配提前问时，它拿着生牛肉去切的比例仍有 83%，锅熟去盛有 78%，只比配提前问时（93% 和 85%）略低，远高于不开联系表时；真正变化的是决定的次数，每局只做了 75 次决定，配提前问时是 102 次。所以收入下降的原因是每一步之间的等待把时间耗掉了，在实时环境里，判断对了但来得晚，同样是代价。Perplexity 不配提前问的那一组里另有 18 次网络超时，所以它的差距比单纯的等待代价还要大一些。</p>
+<p>对 Jev 来说，两种平行时空还互相依赖。11 月 10 日上午的那组 12 局用的是当时的默认设置，平均收入 106 元。这套设置打开了另外两个功能：“两步打算”在每次请求里让 Jeff 记下接下来两步要做的工作，只做记录，不改变选项；“撤回提示”在某个选项会把 Jeff 上一步放下的东西又拿回来时，在选项后面写一句带时间的事实说明。按当时的实现，这两个功能开着时提前问不起作用，所以要用提前问，就得把它们关掉。换成提前问那套设置、但不开联系表时，收入反而降到 19 元（差 −87，95% 区间 −151 到 −22）；两种平行时空都打开，才升到 227 元。我们的解释是，在 Jeff 还连不起前后事件的时候，提前问只会让他更早地做出错误的选择；联系表让判断变对以后，提前问省下的时间才变成收益。</p>
+<p>跑这些整局的方式还有一个细节会影响本节的数字。11 月 10 日跑整局时，联系表是在游戏的主循环里计算的，每算一次整个厨房就停住 0.2 到 1.3 秒，脚本搭档也跟着动不了。这个问题是第二天真人试玩时发现的，因为玩家的人物会被“拉回原处”，现在已经改成在后台计算。这个拖累只落在开联系表的组上，所以本节测到的时间代价比实际偏大；Jev 开联系表后的大幅改善，是在带着这个拖累的情况下测到的。</p>
+<h2 id="s913278">八、把平行时空延伸到搭档身上</h2>
+<p>第二关测的是“预知自己动作的后果”。第四关把厨房用一排柜台隔成两半：Jeff 一侧有食材箱、灶台和出餐口，玩家一侧有案板、水槽和回盘口，中间的柜台两边都够得着。牛肉要先切再煎，而案板只在玩家那边，所以 Jeff 必须把生牛肉传过去，等玩家切好再传回来。这一关测的是另一件事，就是模型会不会把搭档接下来能做什么，算进自己的决定。</p>
+<p>我们把平行时空延伸到了搭档身上：推演时不只看 Jeff 做完以后能做什么，还看搭档拿到这件东西以后能做什么，例如“搭档可以从 4 号柜台拿起，放到 1 号案板，在 1 号案板切”。我们从脚本对局里挑了 20 个 Jeff 拿着生食材的时刻，在四种写法下各问 2 次，统计他把食材“传过去”的比例，传过去包括放到中间柜台和直接扔给搭档。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>请求里多写了什么</th>
+<th>Jev 传过去</th>
+<th>Parallel 传过去</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N</td>
+<td>什么都不加</td>
+<td>0%</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>搭档能从哪里拿到</td>
+<td>0%</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>搭档拿到以后的整条步骤（单独列表）</td>
+<td>13%</td>
+<td>45%</td>
+</tr>
+<tr>
+<td>O2</td>
+<td>同样的整条步骤，写进 Jeff 自己的联系表</td>
+<td>13%</td>
+<td>60%</td>
+</tr>
+</tbody>
+</table></div>
+<p>再看整局。每组 12 局，脚本搭档只在自己一侧切菜、拼盘、洗碗，当时的达标线是 100 元。</p>
+<figure class="fig" id="fig7"><div class="legend"><span><i class="sw off"></i>不开表</span><span><i class="sw on"></i>开联系表和搭档推演</span></div><div class="chart" data-chart="passes"></div><figcaption><b>图 7</b>　第四关每局 Jeff 传给搭档的次数（扔给搭档加上放到中间柜台）。</figcaption></figure>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>设置</th>
+<th>达标</th>
+<th>平均收入</th>
+<th>每局传给搭档</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perplexity</td>
+<td>不开表</td>
+<td>12/12</td>
+<td>316 元</td>
+<td>17.3 次</td>
+</tr>
+<tr>
+<td>Perplexity</td>
+<td>开联系表和搭档推演</td>
+<td>10/12</td>
+<td>234 元</td>
+<td>17.0 次</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>不开表</td>
+<td>0/12</td>
+<td>−37 元</td>
+<td>2.0 次</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>开联系表和搭档推演</td>
+<td>0/12</td>
+<td>5 元</td>
+<td>12.0 次</td>
+</tr>
+</tbody>
+</table></div>
+<p>三个模型在这一关分成了清楚的三档。Perplexity 不需要任何提示，每局主动传给搭档 17 次左右，12 局全部达标；打开推演以后传递次数几乎不变，收入反而少了 82 元（95% 区间 −150 到 −12），因为推演只给它增加了计算时间，没有给它新的信息。Parallel 自己几乎不传，拿到搭档的整条步骤以后，传递比例从 8% 升到 60%，整局每局从 2 次升到 12 次，接近 Perplexity 的水平；但它在出菜的其他环节上仍然没有跟上，12 局一局都没有达标。Jev 拿到了同样的信息，传递比例也只有 13%，它没传出去的时候，大多把生食材放在了自己这一侧的台面上。我们也在第四关分别和两个模型真人玩了一局，结果一样：Perplexity 那局达标，Jeff 往玩家一侧扔了 17 次；Jev 那局 Jeff 一次也没有传，62% 的时候在等待。</p>
+<p>所以，预知自己动作的后果和预知搭档的后果是两种可以分开测量的能力。前一种能力的缺口，平行时空能补上；后一种能力的缺口，只能在一部分模型身上补上。</p>
+<h2 id="s350461">九、和已有研究相比</h2>
+<p>人机协作做菜这个场景，因为 Carroll 等人 2019 年在 NeurIPS 发表的 Overcooked-AI 而被广泛使用。他们发现，靠自我对弈（和自己的副本反复对练）训练出来的智能体和自己配合得很好，换成模仿人类的搭档就差得多，在真人实验里也是这样。之后的研究开始让大模型来做 Overcooked 里的 AI 队友。ProAgent（AAAI 2024）让大模型推测队友的意图、选一个高层技能，再由一个检查器核对这个技能的前提是否满足，不满足就重新规划，最后由控制器把它拆成具体的走路和拿取。HLA（AAMAS 2024）用一个慢的大模型理解玩家的指令，一个快的模型输出宏动作，也就是由多个具体步骤组成的高层动作，再由写好的执行器完成具体步骤，把每个宏动作的平均延迟从 4.16 秒降到 1.07 秒。DPT-Agent（ACL 2025）借用心理学的双系统理论，也就是快的直觉反应和慢的深思熟虑各司其职，用有限状态机和代码策略做快速反应，让大模型在后台异步推理队友的心思。这些系统都让大模型只做高层选择，把“要先做什么才能做什么”的前提推理交给了程序，或者在选择之后再去检查。我们的做法方向相反：选择权一直留在模型手里，环境在选择之前把每个选项的后果算出来交给它，因此能把“模型会不会使用后果信息”这件事单独测出来。</p>
+<p>在评测方面，Embodied Agent Interface（NeurIPS 2024）把具身任务拆成理解目标、拆解子目标、排列动作和预测状态变化四部分，发现大模型常因为前提没满足而漏掉步骤，而且预测动作造成的关系变化比预测物体状态更难；PlanBench（NeurIPS 2023）让大模型预测一个计划执行后的状态，成绩也很低。我们在三个只输出选项概率的决策模型上看到了同样的短板，不同之处在于我们的测量放在实时、连续的环境里，用的是同一时刻重问的办法；我们还看到，这个短板在模型之间差别很大，其中一个模型完全没有。Collab-Overcooked（EMNLP 2025）比较了 13 个大模型，发现它们理解目标的能力很强，但回应别人的协作请求比主动发起协作好得多，主动发起是主要瓶颈。我们第四关的结果与此一致：Jev 和 Parallel 都很少主动把东西传给搭档，而且把搭档的后果写给它们，只能帮到其中一个。</p>
+<p>在“用外部信息帮助模型决策”方面，SayCan（Ahn 等，2022）把“这个动作对目标有没有用”交给语言模型打分，把“这个动作现在能不能做成”交给每个技能的价值函数打分，两者相乘选最高的；LLM-Modulo（ICML 2024 立场论文）主张大模型不能独立规划，应当配上外部的检查器反复生成和检验；CAPE（ICRA 2024）发现大模型规划的动作因前提不满足而失败时，常常只会原样重试，于是把前提错误反馈给它，让它提出补救动作。联系表接近这条思路，但时间点和内容都不同。我们在选择之前就提供信息，而且提供的内容是每个选项做完以后世界会变成什么样，不同于 SayCan 的可行性打分，也不同于 LLM-Modulo 对计划的检查。RAP（EMNLP 2023）让大模型自己充当世界模型去推演，再用树搜索在推演结果里找答案；我们把推演交给精确的游戏引擎，只让模型负责比较和挑选。</p>
+<p>和这些工作相比，本研究多出来三点。第一，同一个时刻可以换写法反复重问，因此能把“提供的内容”和“提供的形式”分开检验。第二，提供后果信息的效果取决于模型，从大幅改善到毫无作用都有。第三，在实时环境里，推演本身的时间成本可以量化，而且可以用另一种平行时空把它藏起来。</p>
+<h2 id="s607083">十、所以，还会选错吗？</h2>
+<p>回到标题。如果能预知未来，模型还会选错吗？答案取决于是哪一个模型。</p>
+<p>有的模型本来就不会选错。Perplexity 在原样的请求里就能推出两类后果，第四关也会主动把东西传给搭档，预知未来对它没有好处，反而因为推演要花时间，第四关少挣了 82 元。</p>
+<p>有的模型看了就会改。Jev 在第二关拿着生牛肉去切的比例从 3% 升到 93%，12 局从 0 局达标变成 9 局。Parallel 在第四关拿到搭档的未来以后，传递次数从每局 2 次升到 12 次。</p>
+<p>也有看了也不改的情况。在第四关，Jev 拿到搭档拿到东西以后的整条步骤，传过去的比例仍然只有 13%。</p>
+<p>这三种情况合在一起，给出了三个结论。第一，在这个实时协作环境里，决策模型的主要短板是推断一个动作的后果，因为只要后果被准确地摆在面前，原本不会推断的模型也能从一长串选项里挑对，可见比较选项这一步它们本来就做得到。这和 Embodied Agent Interface、PlanBench 在离线评测里看到的短板是同一种，我们把它放到了实时、连续的环境里，并且看到它在模型之间差别很大。第二，在实时环境里，预知的未来必须来得及看，所以按选项分岔的推演要和时间往前推的推演一起用，否则推演和等待回复的时间会把收益吃掉。第三，“预知自己的后果”和“预知搭档的后果”是两种能力，后者不一定能靠补充事实补上，这和 Collab-Overcooked 发现的“主动发起协作是主要瓶颈”相互印证。</p>
+<p>这对研究方法也有一个直接的提醒。打开联系表以后，测到的表现来自“模型加上环境提供的预知”这个组合，已经不能当作模型独立的推理能力来解读，所以在 ChefJeff 的研究记录里，无辅助条件和有平行时空辅助的条件分开标注，两者不放在一起比较。</p>
+<p>在 11 月 11 日发布的 0.9.0-beta.1 里，我们按这些结果调整了线上设置：提前问和联系表默认打开，联系表在游戏里叫“步骤提示”；因为它对不同模型的作用不同，玩家可以在设置里自己关掉，研究记录会写明这一局是否由玩家关掉。上线前的压力测试显示，12 个厨房同时运行时，推演让服务器最慢那 5% 的请求从 14 毫秒升到 123 毫秒，人少的时候影响很小。</p>
+<h2 id="s618270">十一、局限和下一步</h2>
+<p>这些结果有明确的适用范围。整局的搭档全部是脚本厨师，它不救火、不盛菜，也不会根据 Jeff 的动作调整，和真人配合时的表现可能不同；真人只在第四关各玩了一局，只能作为旁证。每组只有 12 局，Parallel 这类每局波动很大的模型，组间的细小差别还分辨不出来。重问的每类时刻只有 10 个，都来自同一批对局。我们只测了第二关和第四关，联系表也只往前看一步，“脏盘 → 放进水槽 → 洗”这种要两步才能连上的情况还没有测到。第二关的整局带着第七节提到的“厨房卡住”问题，修复以后还没有重测；第七节对两种平行时空互相依赖的解释，也还没有单独验证。</p>
+<p>接下来我们会和真人一起玩更多局，在修复后重测第二关，把第四关的联系表和搭档推演分开测，并检验第四节提出的两个猜想，也就是模型在某类时刻更容易连上后果，是否和时间压力有关，是否和选项文字与目标工作在字面上的相关有关。</p>
+<hr>
+<h3>附：试验设置速览</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>设置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>游戏</td>
+<td>ChefJeff，仿《胡闹厨房 2》的实时协作做菜游戏，每局 180 秒</td>
+</tr>
+<tr>
+<td>被测模型</td>
+<td>Jev（TypeSafe）、Parallel Decisions（fast 模式）、Perplexity Decider（pplx-decider-v1.2），均为只从选项中挑选的决策模型</td>
+</tr>
+<tr>
+<td>重问</td>
+<td>第二关 30 个时刻 × 每种写法 3 次；第四关 20 个时刻 × 每种写法 2 次；请求由引擎逐字节重建</td>
+</tr>
+<tr>
+<td>整局</td>
+<td>每组 12 局，真实时间，回复时间照实计入，每局最多 200 次请求，单次超过 8 秒算超时</td>
+</tr>
+<tr>
+<td>搭档</td>
+<td>脚本厨师；第二关负责取料、切菜、拼盘、出餐、洗碗，不碰锅、不救火；第四关只在自己一侧工作</td>
+</tr>
+<tr>
+<td>统计</td>
+<td>平均收入之差的 95% 区间用自助法（20,000 次重抽）计算</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>2026 年 11 月 10 日至 11 日</td>
+</tr>
+<tr>
+<td>当时的规则</td>
+<td>两位厨师每秒走 5 格，第二关达标线 200 元，第四关 100 元；0.9.0-beta.1 改为每秒走 4 格后，两关的达标线重新校准为 160 元和 90 元</td>
+</tr>
+</tbody>
+</table></div>
+<h3>参考文献</h3>
+<ol class="refs">
+<li>Carroll, M., Shah, R., Ho, M. K., Griffiths, T. L., Seshia, S. A., Abbeel, P., &amp; Dragan, A. (2019). On the Utility of Learning about Humans for Human-AI Coordination. NeurIPS 2019. <a href="https://arxiv.org/abs/1910.05789" target="_blank" rel="noopener">https://arxiv.org/abs/1910.05789</a></li>
+<li>Zhang, C., et al. (2024). ProAgent: Building Proactive Cooperative Agents with Large Language Models. AAAI 2024. <a href="https://arxiv.org/abs/2308.11339" target="_blank" rel="noopener">https://arxiv.org/abs/2308.11339</a></li>
+<li>Liu, J., Yu, C., Gao, J., Xie, Y., Liao, Q., Wu, Y., &amp; Wang, Y. (2024). LLM-Powered Hierarchical Language Agent for Real-time Human-AI Coordination. AAMAS 2024. <a href="https://arxiv.org/abs/2312.15224" target="_blank" rel="noopener">https://arxiv.org/abs/2312.15224</a></li>
+<li>Zhang, S., et al. (2025). Leveraging Dual Process Theory in Language Agent Framework for Real-time Simultaneous Human-AI Collaboration. ACL 2025. <a href="https://aclanthology.org/2025.acl-long.206/" target="_blank" rel="noopener">https://aclanthology.org/2025.acl-long.206/</a></li>
+<li>Sun, H., et al. (2025). Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents. EMNLP 2025. <a href="https://aclanthology.org/2025.emnlp-main.249/" target="_blank" rel="noopener">https://aclanthology.org/2025.emnlp-main.249/</a></li>
+<li>Li, M., et al. (2024). Embodied Agent Interface: Benchmarking LLMs for Embodied Decision Making. NeurIPS 2024 Datasets and Benchmarks Track. <a href="https://arxiv.org/abs/2410.07166" target="_blank" rel="noopener">https://arxiv.org/abs/2410.07166</a></li>
+<li>Valmeekam, K., Marquez, M., Olmo, A., Sreedharan, S., &amp; Kambhampati, S. (2023). PlanBench: An Extensible Benchmark for Evaluating Large Language Models on Planning and Reasoning about Change. NeurIPS 2023 Datasets and Benchmarks Track. <a href="https://arxiv.org/abs/2206.10498" target="_blank" rel="noopener">https://arxiv.org/abs/2206.10498</a></li>
+<li>Ahn, M., et al. (2022). Do As I Can, Not As I Say: Grounding Language in Robotic Affordances. arXiv:2204.01691；CoRL 2022 收录版第一作者为 Ichter, B. <a href="https://arxiv.org/abs/2204.01691" target="_blank" rel="noopener">https://arxiv.org/abs/2204.01691</a></li>
+<li>Kambhampati, S., et al. (2024). Position: LLMs Can't Plan, But Can Help Planning in LLM-Modulo Frameworks. ICML 2024. <a href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener">https://arxiv.org/abs/2402.01817</a></li>
+<li>Raman, S. S., et al. (2024). CAPE: Corrective Actions from Precondition Errors using Large Language Models. ICRA 2024. <a href="https://arxiv.org/abs/2211.09935" target="_blank" rel="noopener">https://arxiv.org/abs/2211.09935</a></li>
+<li>Hao, S., et al. (2023). Reasoning with Language Model is Planning with World Model. EMNLP 2023. <a href="https://aclanthology.org/2023.emnlp-main.507/" target="_blank" rel="noopener">https://aclanthology.org/2023.emnlp-main.507/</a></li>
+<li>Schrittwieser, J., et al. (2020). Mastering Atari, Go, chess and shogi by planning with a learned model. Nature, 588, 604–609. <a href="https://doi.org/10.1038/s41586-020-03051-4" target="_blank" rel="noopener">https://doi.org/10.1038/s41586-020-03051-4</a></li>
+<li>Wang, Y., He, J., Fan, L., Li, H., Chen, Y., &amp; Zhang, Z. (2024). Driving into the Future: Multiview Visual Forecasting and Planning with World Model for Autonomous Driving. CVPR 2024. <a href="https://arxiv.org/abs/2311.17918" target="_blank" rel="noopener">https://arxiv.org/abs/2311.17918</a></li>
+<li>Jiang, C. M., Masotto, X., &amp; Sun, B. (2026, February 6). The Waymo World Model: A New Frontier For Autonomous Driving Simulation. Waymo Blog. <a href="https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation" target="_blank" rel="noopener">https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation</a></li>
+<li>Wayve. (2025, December 2). GAIA-3: Scaling World Models to Power Safety and Evaluation. <a href="https://wayve.ai/thinking/gaia-3/" target="_blank" rel="noopener">https://wayve.ai/thinking/gaia-3/</a></li>
+<li>Elluswamy, A. (2025, October 24). Tesla's approach to Autonomy. X. <a href="https://x.com/aelluswamy/status/1981644831790379245" target="_blank" rel="noopener">https://x.com/aelluswamy/status/1981644831790379245</a></li>
+</ol>
+</article>
+</div>
+<script>window.BLOG_DATA={"reask": {"pan": [["Jev", 40, 100], ["Parallel", 73, 100], ["Perplexity", 100, 100]], "raw": [["Jev", 33, 97], ["Parallel", 7, 100], ["Perplexity", 100, 100]]}, "arms": [["Jev · 锅熟时刻", [["A", "原样", 47, false], ["B", "写在选项后", 100, true], ["C", "无关事实", 63, false], ["D", "单独列表", 100, true]]], ["Jev · 生食材时刻", [["A", "原样", 30, false], ["B", "写在选项后", 93, true], ["C", "无关事实", 37, false], ["D", "单独列表", 100, true]]], ["Parallel · 锅熟时刻", [["A", "原样", 70, false], ["B", "写在选项后", 100, true], ["C", "无关事实", 93, false], ["D", "单独列表", 97, true]]], ["Parallel · 生食材时刻", [["A", "原样", 7, false], ["B", "写在选项后", 100, true], ["C", "无关事实", 20, false], ["D", "单独列表", 87, true]]]], "waiting": {"table": 0.21, "rows": [["Jev", 1.13], ["Perplexity", 1.65], ["Parallel", 1.9]]}, "passes": [["Perplexity", [17.3, 17.0]], ["Parallel", [2.0, 12.0]]], "rounds": [["Jev", "基础", [60, -30, -30, 53, -30, 53, 150, -30, 53, -37, 46, -30], false], ["Jev", "开联系表", [230, 320, 320, 150, 230, 133, 240, 230, 240, 240, 150, 240], true], ["Parallel", "基础", [-65, -47, -85, 230, -37, 30, -30, -60, 140, -80, -50, -70], false], ["Parallel", "开联系表", [45, 25, 140, 240, 55, -25, 40, 60, 230, 230, 35, -50], true], ["Perplexity", "基础", [240, 400, 320, 305, 400, 320, 320, 320, 320, 320, 400, 320], false], ["Perplexity", "开联系表", [400, 400, 320, 400, 400, 320, 400, 223, 320, 400, 400, 320], true]]};</script>
+<script>// Charts for 如果能预知未来，你还会选错吗？ — plain SVG drawn at the panel's own width (text stays 11–13px),
+// redrawn on resize. Data from the 2026-11-10/11 trial records (window.BLOG_DATA).
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const C = { off: 'var(--series-off)', on: 'var(--series-on)', wait: 'var(--series-wait)' };
+  const el = (tag, attrs, parent) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  };
+  const T = (svg, x, y, s, attrs = {}) => { const t = el('text', { x, y, ...attrs }, svg); t.textContent = s; return t; };
+  const tip = document.createElement('div');
+  tip.className = 'chart-tip';
+  tip.hidden = true;
+  document.body.appendChild(tip);
+  function hover(node, text) {
+    node.setAttribute('tabindex', '0');
+    node.setAttribute('aria-label', text);
+    const show = () => {
+      tip.textContent = text;
+      tip.hidden = false;
+      const r = node.getBoundingClientRect();
+      const x = Math.min(document.documentElement.clientWidth - tip.offsetWidth - 8, Math.max(8, r.left + r.width / 2 - tip.offsetWidth / 2));
+      tip.style.left = x + 'px';
+      tip.style.top = (r.top + window.scrollY - tip.offsetHeight - 8) + 'px';
+    };
+    node.addEventListener('mouseenter', show);
+    node.addEventListener('focus', show);
+    node.addEventListener('mouseleave', () => { tip.hidden = true; });
+    node.addEventListener('blur', () => { tip.hidden = true; });
+  }
+  const svgIn = (panel, H, label) => {
+    const W = Math.max(260, Math.floor(panel.clientWidth));
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: 'img', 'aria-label': label }, panel);
+    return [svg, W];
+  };
+  const panel = host => { const d = document.createElement('div'); d.className = 'panel'; host.appendChild(d); return d; };
+  const narrow = W => W < 420;
+
+  // Before/after dots per model, 0–100%.
+  function dumbbell(p, title, rows) {
+    const rowH = 34, top = 34, H = top + rows.length * rowH + 26;
+    const [svg, W] = svgIn(p, H, title);
+    const left = 80, right = 92;
+    const x = v => left + (W - left - right) * v / 100;
+    T(svg, 0, 16, title, { class: 'ch-title' });
+    for (const v of [0, 50, 100]) {
+      el('line', { x1: x(v), x2: x(v), y1: top - 8, y2: H - 20, class: 'ch-grid' }, svg);
+      T(svg, x(v), H - 5, v + '%', { class: 'ch-axis', 'text-anchor': 'middle' });
+    }
+    rows.forEach(([name, a, b], i) => {
+      const y = top + i * rowH + rowH / 2;
+      T(svg, 0, y + 4, name, { class: 'ch-label' });
+      el('line', { x1: x(a), x2: x(b), y1: y, y2: y, class: 'ch-link' }, svg);
+      hover(el('circle', { cx: x(a), cy: y, r: 6, fill: C.off, class: 'ch-dot' }, svg), `${name}，原样：${a}%`);
+      hover(el('circle', { cx: x(b), cy: y, r: 6, fill: C.on, class: 'ch-dot' }, svg), `${name}，加推演：${b}%`);
+      T(svg, x(100) + 14, y + 4, a === b ? `都是 ${b}%` : `${a}% → ${b}%`, { class: 'ch-value' });
+    });
+  }
+
+  // One bar per way of writing.
+  function arms(p, title, rows) {
+    const rowH = 26, top = 30, H = top + rows.length * rowH + 22;
+    const [svg, W] = svgIn(p, H, title);
+    const left = 112, right = 42;
+    const x = v => left + (W - left - right) * v / 100;
+    T(svg, 0, 16, title, { class: 'ch-title' });
+    for (const v of [0, 50, 100]) {
+      el('line', { x1: x(v), x2: x(v), y1: top - 6, y2: H - 18, class: 'ch-grid' }, svg);
+      T(svg, x(v), H - 4, v + '%', { class: 'ch-axis', 'text-anchor': 'middle' });
+    }
+    rows.forEach(([arm, label, v, pred], i) => {
+      const y = top + i * rowH;
+      T(svg, 0, y + 15, `${arm} ${label}`, { class: 'ch-label' });
+      hover(el('rect', { x: x(0), y: y + 4, width: Math.max(2, x(v) - x(0)), height: 16, fill: pred ? C.on : C.off }, svg), `${arm} ${label}：${v}%`);
+      T(svg, x(v) + 5, y + 16, v + '%', { class: 'ch-value' });
+    });
+  }
+
+  // Per-round money, one row per model and setting.
+  function rounds(p, groups, target) {
+    const rowH = 40, top = 30, H = top + groups.length * rowH + 28;
+    const [svg, W] = svgIn(p, H, '第二关每局净收入');
+    const left = narrow(W) ? 112 : 150, right = 16, lo = -100, hi = 420;
+    const x = v => left + (W - left - right) * (v - lo) / (hi - lo);
+    const ticks = narrow(W) ? [0, 200, 400] : [-100, 0, 100, 200, 300, 400];
+    for (const v of ticks) {
+      el('line', { x1: x(v), x2: x(v), y1: top - 10, y2: H - 22, class: v === 0 ? 'ch-zero' : 'ch-grid' }, svg);
+      T(svg, x(v), H - 6, String(v), { class: 'ch-axis', 'text-anchor': 'middle' });
+    }
+    el('line', { x1: x(target), x2: x(target), y1: top - 16, y2: H - 22, class: 'ch-target' }, svg);
+    T(svg, x(target) + 4, top - 18, `达标线 ${target}`, { class: 'ch-axis' });
+    const dot = narrow(W) ? 4 : 5;
+    groups.forEach(([model, cond, vals, pred], i) => {
+      const y = top + i * rowH + rowH / 2;
+      if (narrow(W)) {
+        T(svg, 0, y + 4, `${model} · ${cond}`, { class: 'ch-label' });
+      } else {
+        if (i % 2 === 0) T(svg, 0, y + 24, model, { class: 'ch-label strong' });
+        T(svg, 78, y + 4, cond, { class: 'ch-label' });
+      }
+      const seen = {};
+      vals.forEach(v => {
+        const k = Math.round((x(v) - left) / (dot * 1.6));
+        const n = seen[k] = (seen[k] || 0) + 1;
+        const dy = (n % 2 ? 1 : -1) * Math.floor(n / 2) * (dot + 1);
+        hover(el('circle', { cx: x(v), cy: y + dy, r: dot, fill: pred ? C.on : C.off, class: 'ch-dot' }, svg), `${model}，${cond}：一局 ${v} 元`);
+      });
+      const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+      hover(el('line', { x1: x(mean), x2: x(mean), y1: y - 14, y2: y + 14, class: 'ch-mean' }, svg), `${model}，${cond}：12 局平均 ${Math.round(mean)} 元`);
+    });
+  }
+
+  // Waiting time per step without asking ahead.
+  function waiting(p, rows, table) {
+    const rowH = 34, top = 12, H = top + rows.length * rowH + 24;
+    const [svg, W] = svgIn(p, H, '每一步要等的时间');
+    const left = 86, right = 58, max = 2.4;
+    const x = v => left + (W - left - right) * v / max;
+    for (const v of [0, 1, 2]) {
+      el('line', { x1: x(v), x2: x(v), y1: top - 4, y2: H - 20, class: 'ch-grid' }, svg);
+      T(svg, x(v), H - 4, v + ' 秒', { class: 'ch-axis', 'text-anchor': 'middle' });
+    }
+    rows.forEach(([name, reply], i) => {
+      const y = top + i * rowH;
+      T(svg, 0, y + 19, name, { class: 'ch-label' });
+      hover(el('rect', { x: x(0), y: y + 6, width: x(table) - x(0), height: 18, fill: C.on }, svg), `推演联系表：约 ${table} 秒`);
+      hover(el('rect', { x: x(table) + 2, y: y + 6, width: x(table + reply) - x(table) - 2, height: 18, fill: C.wait }, svg), `${name} 回复：约 ${reply} 秒`);
+      T(svg, x(table + reply) + 6, y + 19, `${(table + reply).toFixed(1)} 秒`, { class: 'ch-value' });
+    });
+  }
+
+  // Level 4 passes per round.
+  function passes(p, rows) {
+    const rowH = 58, top = 10, H = top + rows.length * rowH + 24;
+    const [svg, W] = svgIn(p, H, '第四关每局传给搭档的次数');
+    const left = 92, right = 44, max = 20;
+    const x = v => left + (W - left - right) * v / max;
+    for (const v of [0, 5, 10, 15, 20]) {
+      el('line', { x1: x(v), x2: x(v), y1: top, y2: H - 20, class: 'ch-grid' }, svg);
+      T(svg, x(v), H - 4, String(v), { class: 'ch-axis', 'text-anchor': 'middle' });
+    }
+    rows.forEach(([name, [a, b]], i) => {
+      const y = top + i * rowH;
+      T(svg, 0, y + 28, name, { class: 'ch-label strong' });
+      [[a, false, '不开表'], [b, true, '开联系表和搭档推演']].forEach(([v, pred, label], j) => {
+        const yy = y + 6 + j * 22;
+        hover(el('rect', { x: x(0), y: yy, width: Math.max(2, x(v) - x(0)), height: 18, fill: pred ? C.on : C.off }, svg), `${name}，${label}：每局 ${v.toFixed(1)} 次`);
+        T(svg, x(v) + 6, yy + 14, v.toFixed(1), { class: 'ch-value' });
+      });
+    });
+  }
+
+  function draw() {
+    const D = window.BLOG_DATA;
+    document.querySelectorAll('[data-chart]').forEach(host => {
+      host.replaceChildren();
+      const kind = host.dataset.chart;
+      if (kind === 'reask') { dumbbell(panel(host), '锅熟时刻', D.reask.pan); dumbbell(panel(host), '生食材时刻', D.reask.raw); }
+      else if (kind === 'arms') for (const [title, rows] of D.arms) arms(panel(host), title, rows);
+      else if (kind === 'rounds') rounds(panel(host), D.rounds, 200);
+      else if (kind === 'waiting') waiting(panel(host), D.waiting.rows, D.waiting.table);
+      else if (kind === 'passes') passes(panel(host), D.passes);
+    });
+  }
+  draw();
+  let lastW = document.documentElement.clientWidth, timer;
+  window.addEventListener('resize', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { const w = document.documentElement.clientWidth; if (w !== lastW) { lastW = w; tip.hidden = true; draw(); } }, 150);
+  });
+})();
+</script>
+
+</html>
